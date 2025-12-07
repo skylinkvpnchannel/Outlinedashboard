@@ -3,156 +3,132 @@
 import NextLink from "next/link";
 import React from "react";
 import { usePathname } from "next/navigation";
-import { Button, Tooltip, useDisclosure } from "@heroui/react";
-import { Link } from "@heroui/link";
+import { Button, useDisclosure } from "@heroui/react";
 import { useForm } from "react-hook-form";
 import { UseDisclosureReturn } from "@heroui/use-disclosure";
 
 import {
-    BellIcon,
-    DynamicAccessKeyIcon,
-    GithubIcon,
-    HashtagIcon,
-    HealthCheckIcon,
-    HeartIconDuotone,
-    Logo,
-    RedditIcon,
-    ServersIcon
+  BellIcon,
+  DynamicAccessKeyIcon,
+  HashtagIcon,
+  HealthCheckIcon,
+  Logo,
+  ServersIcon,
 } from "@/src/components/icons";
+
 import { app } from "@/src/core/config";
 import { logout } from "@/src/core/actions";
 import { ThemeSwitch } from "@/src/components/theme-switch";
-import DonationModal from "@/src/components/modals/donation-modal";
 
 const menuItems = [
-    {
-        label: "Servers",
-        pathName: "/servers",
-        icon: <ServersIcon size={24} />
-    },
-    {
-        label: "Dynamic Access Keys",
-        pathName: "/dynamic-access-keys",
-        icon: <DynamicAccessKeyIcon size={24} />
-    },
-    {
-        label: "Health Checks",
-        pathName: "/health-checks",
-        icon: <HealthCheckIcon size={24} />
-    },
-    {
-        label: "Notification Channels",
-        pathName: "/notification-channels",
-        icon: <BellIcon size={24} />
-    },
-    {
-        label: "Tags",
-        pathName: "/tags",
-        icon: <HashtagIcon size={24} />
-    }
-    // {
-    //     label: "Settings",
-    //     pathName: "#",
-    //     icon: <SettingsIcon size={24} />
-    // }
+  {
+    label: "Servers",
+    pathName: "/servers",
+    icon: <ServersIcon size={22} />,
+  },
+  {
+    label: "Dynamic Access Keys",
+    pathName: "/dynamic-access-keys",
+    icon: <DynamicAccessKeyIcon size={22} />,
+  },
+  {
+    label: "Health Checks",
+    pathName: "/health-checks",
+    icon: <HealthCheckIcon size={22} />,
+  },
+  {
+    label: "Notification Channels",
+    pathName: "/notification-channels",
+    icon: <BellIcon size={22} />,
+  },
+  {
+    label: "Tags",
+    pathName: "/tags",
+    icon: <HashtagIcon size={22} />,
+  },
 ];
 
 interface Props {
-    drawerDisclosure?: UseDisclosureReturn;
+  drawerDisclosure?: UseDisclosureReturn;
 }
 
 export const SideMenu = ({ drawerDisclosure }: Props) => {
-    const currentPathname = usePathname();
-    const donationModalDisclosure = useDisclosure();
-    const logoutForm = useForm();
+  const currentPathname = usePathname();
+  useDisclosure(); // future use, now safe to keep
+  const logoutForm = useForm();
 
-    const handleLogout = async () => {
-        await logout();
-    };
+  const handleLogout = async () => {
+    await logout();
+  };
 
-    const handleDrawerClose = () => {
-        if (drawerDisclosure) {
-            drawerDisclosure.onClose();
-        }
-    };
+  const handleDrawerClose = () => {
+    if (drawerDisclosure) drawerDisclosure.onClose();
+  };
 
-    return (
-        <>
-            <DonationModal disclosure={donationModalDisclosure} />
+  return (
+    <div className="flex flex-col justify-between gap-2 h-screen w-[300px] bg-white dark:bg-slate-900 border-r border-gray-200 dark:border-slate-800 xl:fixed text-gray-900 dark:text-gray-100">
+      {/* Top */}
+      <div className="mt-6 px-4">
+        <div className="grid gap-3">
+          <NextLink
+            className="w-fit justify-self-center flex flex-col items-center gap-2"
+            href="/"
+            onClick={handleDrawerClose}
+          >
+            <Logo size={56} />
+            <p className="font-bold tracking-wide">
+              {app.name.toUpperCase()}
+            </p>
+          </NextLink>
 
-            <div className="flex flex-col justify-between gap-2 h-screen w-[316px] bg-default-50 dark:bg-content1 xl:fixed">
-                <div className="mt-8">
-                    <div className="grid gap-4">
-                        <NextLink
-                            className="w-fit justify-self-center flex flex-col justify-start items-center gap-2"
-                            href="/"
-                        >
-                            <Logo size={64} />
-                            <p className="font-bold text-inherit">{app.name.toUpperCase()} </p>
-                        </NextLink>
+          <div className="flex items-center justify-center">
+            <ThemeSwitch />
+          </div>
+        </div>
 
-                        <div className="flex gap-6 items-center justify-center">
-                            <Tooltip closeDelay={100} content="Donation">
-                                <Link href="#" onPress={donationModalDisclosure.onOpen}>
-                                    <HeartIconDuotone className="text-default-500" size={24} />
-                                </Link>
-                            </Tooltip>
+        <nav className="grid gap-2 mt-8">
+          {menuItems.map((item) => {
+            const active = currentPathname.startsWith(item.pathName);
+            return (
+              <NextLink
+                key={item.pathName}
+                href={item.pathName}
+                onClick={handleDrawerClose}
+                className={[
+                  "flex items-center gap-3 px-3 py-2 rounded-xl transition",
+                  active
+                    ? "bg-primary-50 text-primary-600 dark:bg-primary-900/30 dark:text-primary-300"
+                    : "text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-slate-800",
+                ].join(" ")}
+              >
+                <div className="shrink-0">{item.icon}</div>
+                <span className="font-medium">{item.label}</span>
+              </NextLink>
+            );
+          })}
+        </nav>
+      </div>
 
-                            <Tooltip closeDelay={100} content="Github page">
-                                <Link isExternal href={app.links.github}>
-                                    <GithubIcon className="text-default-500" size={24} />
-                                </Link>
-                            </Tooltip>
+      {/* Bottom */}
+      <div className="p-4 grid gap-3">
+        <form onSubmit={logoutForm.handleSubmit(handleLogout)}>
+          <Button
+            color="danger"
+            fullWidth
+            isLoading={logoutForm.formState.isSubmitting}
+            type="submit"
+            variant="flat"
+          >
+            Logout
+          </Button>
+        </form>
 
-                            <Tooltip closeDelay={100} content="Reddit page">
-                                <Link isExternal href={app.links.outlineVpn.index}>
-                                    <RedditIcon className="text-default-500" size={24} />
-                                </Link>
-                            </Tooltip>
-
-                            <ThemeSwitch />
-                        </div>
-                    </div>
-
-                    <nav className="grid gap-6 mt-16 px-4">
-                        {menuItems.map((item) => (
-                            <NextLink
-                                key={item.pathName}
-                                className={`flex gap-2 items-center ${currentPathname.startsWith(item.pathName) ? "text-primary-500" : "text-default-500"}`}
-                                href={item.pathName}
-                                onClick={handleDrawerClose}
-                            >
-                                {item.icon}
-                                <span>{item.label}</span>
-                            </NextLink>
-                        ))}
-                    </nav>
-                </div>
-
-                <div className="p-2 grid gap-2">
-                    <form className="w-full" onSubmit={logoutForm.handleSubmit(handleLogout)}>
-                        <Button
-                            color="danger"
-                            fullWidth={true}
-                            isLoading={logoutForm.formState.isSubmitting}
-                            type="submit"
-                            variant="flat"
-                        >
-                            Logout
-                        </Button>
-                    </form>
-
-                    <Tooltip color="foreground" content="Change log" size="sm">
-                        <NextLink
-                            className="text-xs text-foreground-400 font-normal mx-auto"
-                            href={`${app.links.github}/releases/tag/v${process.env.VERSION}`}
-                            target="_blank"
-                        >
-                            v{process.env.VERSION}
-                        </NextLink>
-                    </Tooltip>
-                </div>
-            </div>
-        </>
-    );
+        <div className="text-xs text-gray-500 dark:text-gray-400 text-center">
+          © {new Date().getFullYear()} {app.name}
+        </div>
+      </div>
+    </div>
+  );
 };
+
+export default SideMenu;
