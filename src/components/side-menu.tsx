@@ -23,26 +23,31 @@ import { ThemeSwitch } from "@/src/components/theme-switch";
 const menuItems = [
   {
     label: "Servers",
+    subLabel: "ဆာဗာများ",
     pathName: "/servers",
     icon: <ServersIcon size={22} />,
   },
   {
     label: "Dynamic Access Keys",
+    subLabel: "Access Key များ",
     pathName: "/dynamic-access-keys",
     icon: <DynamicAccessKeyIcon size={22} />,
   },
   {
     label: "Health Checks",
+    subLabel: "စစ်ဆေးမှု",
     pathName: "/health-checks",
     icon: <HealthCheckIcon size={22} />,
   },
   {
     label: "Notification Channels",
+    subLabel: "သတိပေးချက်များ",
     pathName: "/notification-channels",
     icon: <BellIcon size={22} />,
   },
   {
     label: "Tags",
+    subLabel: "တက်ဂ်များ",
     pathName: "/tags",
     icon: <HashtagIcon size={22} />,
   },
@@ -102,7 +107,12 @@ export const SideMenu = ({ drawerDisclosure }: Props) => {
                 ].join(" ")}
               >
                 <div className="shrink-0">{item.icon}</div>
-                <span className="font-medium">{item.label}</span>
+
+                {/* English + Myanmar labels */}
+                <div className="flex flex-col leading-tight">
+                  <span className="font-medium">{item.label}</span>
+                  <span className="text-xs opacity-70">{item.subLabel}</span>
+                </div>
               </NextLink>
             );
           })}
