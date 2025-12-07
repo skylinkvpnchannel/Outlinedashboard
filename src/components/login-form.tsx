@@ -27,17 +27,17 @@ export default function LoginForm() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4 text-gray-900">
+    <div className="min-h-screen flex items-center justify-center bg-background px-4">
       <form
-        className="w-full max-w-sm bg-white rounded-2xl shadow-lg p-8 flex flex-col items-center gap-4 text-gray-900"
+        className="w-full max-w-sm bg-content1 rounded-2xl shadow-lg p-8 flex flex-col items-center gap-4"
         onSubmit={form.handleSubmit(actualSubmit)}
       >
         <div className="flex flex-col items-center gap-2 mb-2">
           <Logo size={72} />
-          <h1 className="text-2xl font-bold tracking-tight text-gray-900">
+          <h1 className="text-2xl font-bold tracking-tight text-foreground">
             Outline Admin Dashboard
           </h1>
-          <p className="text-sm text-gray-600 text-center">
+          <p className="text-sm text-default-600 text-center">
             Server နဲ့ Access Key တွေ စီမံရန် ဝင်ရောက်ပါ
           </p>
         </div>
@@ -57,7 +57,7 @@ export default function LoginForm() {
           })}
         />
 
-        <label className="w-full flex items-center gap-2 text-sm text-gray-700">
+        <label className="w-full flex items-center gap-2 text-sm text-default-600">
           <input
             type="checkbox"
             checked={showPassword}
@@ -78,7 +78,7 @@ export default function LoginForm() {
           ဝင်မယ်
         </Button>
 
-        <p className="text-xs text-gray-500 mt-2 text-center">
+        <p className="text-xs text-default-500 mt-2 text-center">
           © {new Date().getFullYear()} Outline Admin
         </p>
       </form>
