@@ -35,7 +35,7 @@ export default function LoginForm() {
         <div className="flex flex-col items-center gap-2 mb-2">
           <Logo size={72} />
           <h1 className="text-2xl font-bold tracking-tight text-foreground">
-            Outline Admin Dashboard
+            Outline Dashboard
           </h1>
           <p className="text-sm text-default-600 text-center">
             Server နဲ့ Access Key တွေ စီမံရန် ဝင်ရောက်ပါ
@@ -79,7 +79,7 @@ export default function LoginForm() {
         </Button>
 
         <p className="text-xs text-default-500 mt-2 text-center">
-          © {new Date().getFullYear()} Outline Admin
+          © {new Date().getFullYear()} Outline Dashboard
         </p>
       </form>
     </div>
