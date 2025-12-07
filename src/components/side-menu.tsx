@@ -134,7 +134,7 @@ export const SideMenu = ({ drawerDisclosure }: Props) => {
         </form>
 
         <div className="text-xs text-gray-500 dark:text-gray-400 text-center">
-          © {new Date().getFullYear()} {app.name}
+              © {new Date().getFullYear()} Outline Dashboard
         </div>
       </div>
     </div>
