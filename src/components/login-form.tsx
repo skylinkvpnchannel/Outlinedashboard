@@ -1,61 +1,87 @@
 "use client";
 
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Button, Input } from "@heroui/react";
-
 import { checkPassword, login } from "@/src/core/actions";
 import { Logo } from "@/src/components/icons";
 
 interface FormProps {
-    password: string;
+  password: string;
 }
 
 export default function LoginForm() {
-    const form = useForm<FormProps>();
+  const form = useForm<FormProps>();
+  const [showPassword, setShowPassword] = useState(false);
 
-    const actualSubmit = async (data: FormProps) => {
-        const userId = await checkPassword(data.password);
+  const actualSubmit = async (data: FormProps) => {
+    const userId = await checkPassword(data.password);
+    if (userId) {
+      await login(userId);
+    } else {
+      form.setError("password", {
+        type: "custom",
+        message: "စကားဝှက်မမှန်ပါ။",
+      });
+    }
+  };
 
-        if (userId) {
-            await login(userId);
-        } else {
-            form.setError("password", { type: "custom", message: "Incorrect password." });
-        }
-    };
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4 text-gray-900">
+      <form
+        className="w-full max-w-sm bg-white rounded-2xl shadow-lg p-8 flex flex-col items-center gap-4 text-gray-900"
+        onSubmit={form.handleSubmit(actualSubmit)}
+      >
+        <div className="flex flex-col items-center gap-2 mb-2">
+          <Logo size={72} />
+          <h1 className="text-2xl font-bold tracking-tight text-gray-900">
+            Outline Admin Dashboard
+          </h1>
+          <p className="text-sm text-gray-600 text-center">
+            Server နဲ့ Access Key တွေ စီမံရန် ဝင်ရောက်ပါ
+          </p>
+        </div>
 
-    return (
-        <form
-            className="flex flex-col items-center justify-center gap-2 min-h-[64vh]"
-            onSubmit={form.handleSubmit(actualSubmit)}
+        <Input
+          className="w-full"
+          color="primary"
+          errorMessage={form.formState.errors.password?.message}
+          isInvalid={!!form.formState.errors.password}
+          label="Admin Password"
+          placeholder="••••••••"
+          type={showPassword ? "text" : "password"}
+          variant="underlined"
+          {...form.register("password", {
+            required: "စကားဝှက်ထည့်ပါ။",
+            maxLength: { value: 64, message: "အများဆုံး 64 လုံးသာရမယ်။" },
+          })}
+        />
+
+        <label className="w-full flex items-center gap-2 text-sm text-gray-700">
+          <input
+            type="checkbox"
+            checked={showPassword}
+            onChange={(e) => setShowPassword(e.target.checked)}
+          />
+          Show password
+        </label>
+
+        <Button
+          className="w-full font-semibold"
+          color="primary"
+          isLoading={
+            form.formState.isSubmitting || form.formState.isSubmitSuccessful
+          }
+          type="submit"
+          variant="shadow"
         >
-            <div className="mb-8">
-                <Logo size={86} />
-            </div>
+          ဝင်မယ်
+        </Button>
 
-            <Input
-                className="w-[264px]"
-                color="primary"
-                errorMessage={form.formState.errors.password?.message}
-                isInvalid={!!form.formState.errors.password}
-                label="Password"
-                placeholder="Enter your password"
-                type="password"
-                variant="underlined"
-                {...form.register("password", {
-                    required: true,
-                    maxLength: 64
-                })}
-            />
-
-            <Button
-                className="w-[264px]"
-                color="primary"
-                isLoading={form.formState.isSubmitting || form.formState.isSubmitSuccessful}
-                type="submit"
-                variant="shadow"
-            >
-                Login
-            </Button>
-        </form>
-    );
+        <p className="text-xs text-gray-500 mt-2 text-center">
+          © {new Date().getFullYear()} Outline Admin
+        </p>
+      </form>
+    </div>
+  );
 }
