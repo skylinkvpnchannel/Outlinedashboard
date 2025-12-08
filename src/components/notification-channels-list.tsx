@@ -96,13 +96,13 @@ export default function NotificationChannelsList({ data }: Props) {
                 body={
                     <div className="grid gap-2">
                         <span>
-                            Are you sure you want to delete <q>{channel?.name}</q> notification channel?
+                            <q>{channel?.name}</q> Notification Channel ကို ဖျက်ချင်တာ သေချာပြီလား?
                         </span>
                     </div>
                 }
-                confirmLabel="Remove"
+                confirmLabel="ဖျက်မယ်"
                 disclosure={deleteConfirmModalDisclosure}
-                title="Delete Notification Channel"
+                title="Notification Channel ဖျက်မယ်"
                 onConfirm={handleDelete}
             />
 
@@ -115,7 +115,7 @@ export default function NotificationChannelsList({ data }: Props) {
                     <form onSubmit={searchForm.handleSubmit(handleSearch)}>
                         <Input
                             className="w-fit"
-                            placeholder="Name [+Enter]"
+                            placeholder="အမည် [+Enter]"
                             startContent={<>🔍</>}
                             variant="faded"
                             {...searchForm.register("term")}
@@ -129,12 +129,12 @@ export default function NotificationChannelsList({ data }: Props) {
                         startContent={<PlusIcon size={20} />}
                         variant="shadow"
                     >
-                        Add
+                        ထည့်မယ်
                     </Button>
                 </div>
 
                 <Table
-                    aria-label="Servers list"
+                    aria-label="Notification channels list"
                     bottomContent={
                         totalPage > 1 && (
                             <div className="flex justify-center">
@@ -150,10 +150,11 @@ export default function NotificationChannelsList({ data }: Props) {
                 >
                     <TableHeader>
                         <TableColumn>ID</TableColumn>
-                        <TableColumn>NAME</TableColumn>
-                        <TableColumn>TYPE</TableColumn>
-                        <TableColumn align="center">ACTIONS</TableColumn>
+                        <TableColumn>အမည်</TableColumn>
+                        <TableColumn>အမျိုးအစား</TableColumn>
+                        <TableColumn align="center">လုပ်ဆောင်ချက်များ</TableColumn>
                     </TableHeader>
+
                     <TableBody emptyContent={<NoResult />} isLoading={isLoading} loadingContent={<Spinner />}>
                         {channels.map((channel) => (
                             <TableRow key={channel.id}>
@@ -163,7 +164,7 @@ export default function NotificationChannelsList({ data }: Props) {
 
                                 <TableCell>
                                     <div className="flex gap-2 justify-center items-center">
-                                        <Tooltip closeDelay={100} color="primary" content="Edit" delay={600} size="sm">
+                                        <Tooltip closeDelay={100} color="primary" content="ပြင်မယ်" delay={600} size="sm">
                                             <Button
                                                 as={Link}
                                                 color="primary"
@@ -176,7 +177,7 @@ export default function NotificationChannelsList({ data }: Props) {
                                             </Button>
                                         </Tooltip>
 
-                                        <Tooltip closeDelay={100} color="danger" content="Delete" delay={600} size="sm">
+                                        <Tooltip closeDelay={100} color="danger" content="ဖျက်မယ်" delay={600} size="sm">
                                             <Button
                                                 color="danger"
                                                 isIconOnly={true}
