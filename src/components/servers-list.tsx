@@ -36,6 +36,7 @@ export default function ServersList({ data }: Props) {
     const removeServerConfirmModalDisclosure = useDisclosure();
 
     const searchForm = useForm<SearchFormProps>();
+
     const handleSearch = async (data: SearchFormProps) => {
         const filteredServers = await getServersWithTags(
             {
@@ -43,13 +44,11 @@ export default function ServersList({ data }: Props) {
             },
             true
         );
-
         setServers(filteredServers);
     };
 
     const handleRemoveServer = async () => {
         if (!serverToRemove) return;
-
         await removeServer(serverToRemove);
     };
 
@@ -62,27 +61,27 @@ export default function ServersList({ data }: Props) {
             <ConfirmModal
                 body={
                     <div className="grid gap-2">
-                        <span>Are you sure you want to remove this server?</span>
+                        <span>ဒီ Server ကိုဖျက်ချင်တာ သေချာပြီလား?</span>
                         <p className="text-default-500 text-sm">
-                            Please note that this action will only remove the server from the {app.name}
-                            &apos;s database. The server itself will not be affected.
+                            ဒီလုပ်ဆောင်ချက်က {app.name} ရဲ့ database ထဲက ပဲ ဖျက်တာပါ။
+                            Server ကိုကိုယ်တိုင်တော့ ထိခိုက်မှာ မဟုတ်ပါဘူး။
                         </p>
                     </div>
                 }
-                confirmLabel="Remove"
+                confirmLabel="ဖျက်မယ်"
                 disclosure={removeServerConfirmModalDisclosure}
-                title="Remove Server"
+                title="Server ဖျက်မယ်"
                 onConfirm={handleRemoveServer}
             />
 
             <div className="grid gap-4">
-                <h1 className="text-xl">Servers</h1>
+                <h1 className="text-xl font-semibold">Servers</h1>
 
-                <div className="flex justify-between items-center gap-2">
+                <div className="flex justify-between items-center gap-2 flex-wrap">
                     <form onSubmit={searchForm.handleSubmit(handleSearch)}>
                         <Input
-                            className="w-fit"
-                            placeholder="Name or Hostname [+Enter]"
+                            className="w-fit min-w-[220px]"
+                            placeholder="နာမည်/Host ရိုက်ပြီး Enter နှိပ်ပါ"
                             startContent={<>🔍</>}
                             variant="faded"
                             {...searchForm.register("term")}
@@ -96,18 +95,22 @@ export default function ServersList({ data }: Props) {
                         startContent={<PlusIcon size={20} />}
                         variant="shadow"
                     >
-                        Add
+                        Server အသစ်ထည့်မယ်
                     </Button>
                 </div>
 
-                <div className="flex flex-wrap justify-center gap-4">
+                {/* ✅ grid layout: phone 1 col, tablet 2 col, desktop 3 col */}
+                <div className="grid gap-4 grid-cols-1 md:grid-cols-2 xl:grid-cols-3 place-items-center">
                     {servers.map((item) => (
-                        <Card key={item.id} className="md:w-[400px] w-full">
+                        <Card key={item.id} className="w-full md:w-[400px]">
                             <CardHeader>
                                 <div className="grid gap-1">
-                                    <span className="max-w-[360px] truncate">{item.name}</span>
+                                    <span className="max-w-[360px] truncate font-medium">
+                                        {item.name}
+                                    </span>
                                 </div>
                             </CardHeader>
+
                             <CardBody className="text-sm grid gap-2">
                                 <div className="flex gap-1 justify-between items-center">
                                     <span>ID</span>
@@ -124,28 +127,28 @@ export default function ServersList({ data }: Props) {
                                 </div>
 
                                 <div className="flex gap-1 justify-between items-center">
-                                    <span>Host/IP for new access keys</span>
+                                    <span>Key အသစ်များအတွက် Host/IP</span>
                                     <Chip radius="sm" size="sm" variant="flat">
                                         {item.hostnameForNewAccessKeys}
                                     </Chip>
                                 </div>
 
                                 <div className="flex gap-1 justify-between items-center">
-                                    <span>Port for new access keys</span>
+                                    <span>Key အသစ် Port</span>
                                     <Chip radius="sm" size="sm" variant="flat">
                                         {item.portForNewAccessKeys}
                                     </Chip>
                                 </div>
 
                                 <div className="flex gap-1 justify-between items-center">
-                                    <span>Number of keys</span>
+                                    <span>Keys အရေအတွက်</span>
                                     <Chip color="default" radius="sm" size="sm" variant="flat">
                                         {item._count?.accessKeys}
                                     </Chip>
                                 </div>
 
                                 <div className="flex gap-1 justify-between items-center">
-                                    <span>Total data usage</span>
+                                    <span>Data သုံးစွဲမှု စုစုပေါင်း</span>
                                     <Chip color="default" radius="sm" size="sm" variant="flat">
                                         {formatBytes(Number(item.totalDataUsage))}
                                     </Chip>
@@ -159,7 +162,7 @@ export default function ServersList({ data }: Props) {
                                         size="sm"
                                         variant="flat"
                                     >
-                                        {item.isAvailable ? "Available" : "Not Available"}
+                                        {item.isAvailable ? "အသင့်" : "မရနိုင်"}
                                     </Chip>
                                 </div>
 
@@ -181,10 +184,11 @@ export default function ServersList({ data }: Props) {
                                             ))}
                                         </div>
                                     ) : (
-                                        <span className="text-foreground-400">¯\_(ツ)_/¯</span>
+                                        <span className="text-foreground-400">မရှိသေးပါ</span>
                                     )}
                                 </div>
                             </CardBody>
+
                             <CardFooter>
                                 <ButtonGroup color="default" fullWidth={true} size="sm" variant="flat">
                                     <Button as={Link} href={`/servers/${item.id}/access-keys`}>
@@ -206,7 +210,7 @@ export default function ServersList({ data }: Props) {
                                             removeServerConfirmModalDisclosure.onOpen();
                                         }}
                                     >
-                                        Delete
+                                        ဖျက်မယ်
                                     </Button>
                                 </ButtonGroup>
                             </CardFooter>
