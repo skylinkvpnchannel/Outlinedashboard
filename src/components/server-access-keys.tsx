@@ -106,24 +106,28 @@ export default function ServerAccessKeys({ server, total }: Props) {
             <MessageModal
                 body={
                     <div className="grid gap-2">
-                        <span>Could not delete the access key. Something went wrong.</span>
-                        <pre className="text-sm break-words whitespace-pre-wrap text-danger-500">{serverError}</pre>
+                        <span>Access Key ကို ဖျက်မရပါ။ တစ်ခုခုမှားယွင်းနေပါတယ်။</span>
+                        <pre className="text-sm break-words whitespace-pre-wrap text-danger-500">
+                            {serverError}
+                        </pre>
                     </div>
                 }
                 disclosure={apiErrorModalDisclosure}
-                title="Server Error!"
+                title="Server အမှား!"
             />
 
             <ConfirmModal
                 body={
                     <div className="grid gap-2">
-                        <span>Are you sure you want to remove this access key?</span>
-                        <p className="text-default-500 text-sm whitespace-pre-wrap break-all">{formattedAccessKey}</p>
+                        <span>ဒီ Access Key ကို ဖျက်ချင်တာ သေချာပြီလား?</span>
+                        <p className="text-default-500 text-sm whitespace-pre-wrap break-all">
+                            {formattedAccessKey}
+                        </p>
                     </div>
                 }
-                confirmLabel="Remove"
+                confirmLabel="ဖျက်မယ်"
                 disclosure={removeAccessKeyConfirmModalDisclosure}
-                title="Remove Access Key"
+                title="Access Key ဖျက်မယ်"
                 onConfirm={handleRemoveAccessKey}
             />
 
@@ -162,7 +166,7 @@ export default function ServerAccessKeys({ server, total }: Props) {
                             startContent={<PlusIcon size={20} />}
                             variant="shadow"
                         >
-                            Create
+                            Key အသစ်လုပ်မယ်
                         </Button>
                     </div>
 
@@ -174,6 +178,7 @@ export default function ServerAccessKeys({ server, total }: Props) {
                                         <span className="max-w-[360px] truncate">{item.name}</span>
                                     </div>
                                 </CardHeader>
+
                                 <CardBody className="text-sm grid gap-2">
                                     <div className="flex gap-1 justify-between items-center">
                                         <span>ID</span>
@@ -183,12 +188,12 @@ export default function ServerAccessKeys({ server, total }: Props) {
                                     </div>
 
                                     <div className="flex gap-1 justify-between items-center">
-                                        <span>Data usage</span>
+                                        <span>Data သုံးစွဲမှု</span>
                                         <AccessKeyDataUsageChip item={item} />
                                     </div>
 
                                     <div className="flex gap-1 justify-between items-center">
-                                        <span>Validity</span>
+                                        <span>သက်တမ်း</span>
                                         <AccessKeyValidityChip value={item.expiresAt} />
                                     </div>
 
@@ -200,10 +205,11 @@ export default function ServerAccessKeys({ server, total }: Props) {
                                             size="sm"
                                             variant="flat"
                                         >
-                                            {item.prefix ? item.prefix : "None"}
+                                            {item.prefix ? item.prefix : "မရှိ"}
                                         </Chip>
                                     </div>
                                 </CardBody>
+
                                 <CardFooter>
                                     <ButtonGroup color="default" fullWidth={true} size="sm" variant="flat">
                                         <Button
@@ -212,11 +218,11 @@ export default function ServerAccessKeys({ server, total }: Props) {
                                                 accessKeyModalDisclosure.onOpen();
                                             }}
                                         >
-                                            Share
+                                            မျှဝေမယ်
                                         </Button>
 
                                         <Button as={Link} href={`/servers/${server.id}/access-keys/${item.id}/edit`}>
-                                            Edit
+                                            ပြင်မယ်
                                         </Button>
 
                                         <Button
@@ -226,7 +232,7 @@ export default function ServerAccessKeys({ server, total }: Props) {
                                                 removeAccessKeyConfirmModalDisclosure.onOpen();
                                             }}
                                         >
-                                            Delete
+                                            ဖျက်မယ်
                                         </Button>
                                     </ButtonGroup>
                                 </CardFooter>
