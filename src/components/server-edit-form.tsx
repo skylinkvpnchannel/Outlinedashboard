@@ -1,6 +1,15 @@
 "use client";
 
-import { Button, Checkbox, CheckboxGroup, Divider, Input, Link, Tooltip, useDisclosure } from "@heroui/react";
+import {
+    Button,
+    Checkbox,
+    CheckboxGroup,
+    Divider,
+    Input,
+    Link,
+    Tooltip,
+    useDisclosure
+} from "@heroui/react";
 import React, { useState } from "react";
 import { Tag } from "@prisma/client";
 import { useForm } from "react-hook-form";
@@ -63,33 +72,35 @@ export default function ServerEditForm({ server, tags }: Props) {
             <MessageModal
                 body={
                     <div className="grid gap-2">
-                        <span>Could not update server. Something went wrong.</span>
-                        <pre className="text-sm break-words whitespace-pre-wrap text-danger-500">{serverError}</pre>
+                        <span>Server ကို မပြင်နိုင်ပါ။ တစ်ခုခုမှားယွင်းနေပါတယ်။</span>
+                        <pre className="text-sm break-words whitespace-pre-wrap text-danger-500">
+                            {serverError}
+                        </pre>
                     </div>
                 }
                 disclosure={updateErrorModalDisclosure}
-                title="Server Error!"
+                title="Server အမှား!"
             />
 
             <ConfirmModal
                 body={
                     <div className="grid gap-2">
-                        <span>Are you sure you want to remove this server?</span>
+                        <span>ဒီ Server ကို ဖျက်ချင်တာ သေချာပြီလား?</span>
                         <p className="text-default-500 text-sm">
-                            Please note that this action will only remove the server from the {app.name}
-                            &apos;s database. The server itself will not be affected.
+                            ဒီလုပ်ဆောင်ချက်က {app.name} ရဲ့ database ထဲက ပဲ ဖျက်တာပါ။
+                            Server ကိုကိုယ်တိုင်တော့ ထိခိုက်မှာ မဟုတ်ပါဘူး။
                         </p>
                     </div>
                 }
-                confirmLabel="Remove"
+                confirmLabel="ဖျက်မယ်"
                 disclosure={removeServerConfirmModalDisclosure}
-                title="Remove Server"
+                title="Server ဖျက်မယ်"
                 onConfirm={handleRemoveServer}
             />
 
             <div className="grid gap-6">
                 <section className="flex justify-start items-center gap-2">
-                    <Tooltip closeDelay={100} color="default" content="Back" delay={600} size="sm">
+                    <Tooltip closeDelay={100} color="default" content="နောက်သို့" delay={600} size="sm">
                         <Button
                             as={Link}
                             href={returnUrl ? returnUrl : "/servers"}
@@ -101,16 +112,17 @@ export default function ServerEditForm({ server, tags }: Props) {
                         </Button>
                     </Tooltip>
 
-                    <h1 className="text-xl">Server Settings</h1>
+                    <h1 className="text-xl">Server ဆက်တင်များ</h1>
                 </section>
 
                 <form className="p-2 grid gap-4" onSubmit={form.handleSubmit(actualSubmit)}>
-                    <span className="text-lg">Editable Information</span>
+                    <span className="text-lg">ပြင်လို့ရတဲ့ အချက်အလက်များ</span>
+
                     <Input
                         className="w-[320px]"
-                        description="Set a new name for your server. Note that this will not be reflected on the devices of the users that you invited to connect to it"
+                        description="Server အတွက် နာမည်အသစ် သတ်မှတ်နိုင်ပါတယ်။ ဒီနာမည်က သုံးစွဲသူ device တွေအပေါ်မှာတော့ အလိုအလျောက် မပြောင်းသွားနိုင်ပါဘူး။"
                         isInvalid={!!form.formState.errors.name}
-                        label="Server name"
+                        label="Server နာမည်"
                         required={true}
                         size="sm"
                         variant="underlined"
@@ -122,9 +134,9 @@ export default function ServerEditForm({ server, tags }: Props) {
 
                     <Input
                         className="w-[320px]"
-                        description="This will not affect the existing access keys"
+                        description="အခုရှိပြီးသား access keys တွေကို မထိခိုက်ပါဘူး။"
                         isInvalid={!!form.formState.errors.hostnameForNewAccessKeys}
-                        label="Hostname or IP for new access keys"
+                        label="Key အသစ်များအတွက် Hostname/IP"
                         required={true}
                         size="sm"
                         variant="underlined"
@@ -136,9 +148,9 @@ export default function ServerEditForm({ server, tags }: Props) {
 
                     <Input
                         className="w-[320px]"
-                        description="This will not affect the existing access keys. Make sure the port is not in use by other programs"
+                        description="အခုရှိပြီးသား access keys တွေကို မထိခိုက်ပါဘူး။ သုံးမနေတဲ့ port ကို သေချာရွေးပါ။"
                         isInvalid={!!form.formState.errors.portForNewAccessKeys}
-                        label="Port for new access keys (Max: 65535)"
+                        label="Key အသစ် Port (အများဆုံး 65535)"
                         required={true}
                         size="sm"
                         type="number"
@@ -170,25 +182,26 @@ export default function ServerEditForm({ server, tags }: Props) {
                         type="submit"
                         variant="shadow"
                     >
-                        Save
+                        သိမ်းမယ်
                     </Button>
                 </form>
 
                 <Divider />
 
                 <div className="p-2 grid gap-4">
-                    <span className="text-lg">Remove The Server</span>
+                    <span className="text-lg">Server ဖျက်မယ်</span>
                     <p className="text-default-500 text-sm">
-                        Please note that this action will only remove the server from the {app.name}&apos;s database.
-                        The server itself will not be affected.
+                        ဒီလုပ်ဆောင်ချက်က {app.name}&apos;s database ထဲက ပဲ ဖျက်တာပါ။
+                        Server ကိုကိုယ်တိုင်တော့ ထိခိုက်မှာ မဟုတ်ပါဘူး။
                     </p>
+
                     <Button
                         className="w-fit"
                         color="danger"
                         variant="shadow"
                         onPress={removeServerConfirmModalDisclosure.onOpen}
                     >
-                        Remove
+                        ဖျက်မယ်
                     </Button>
                 </div>
             </div>
