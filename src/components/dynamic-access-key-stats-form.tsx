@@ -1,7 +1,15 @@
 "use client";
 
 import { useForm } from "react-hook-form";
-import { Button, ButtonGroup, Card, CardBody, CardHeader, Input, useDisclosure } from "@heroui/react";
+import {
+    Button,
+    ButtonGroup,
+    Card,
+    CardBody,
+    CardHeader,
+    Input,
+    useDisclosure
+} from "@heroui/react";
 import React, { useState } from "react";
 import slugify from "slugify";
 
@@ -13,6 +21,7 @@ import NoResult from "@/src/components/no-result";
 import { getDynamicAccessKeyStatsByPath } from "@/src/core/actions/dynamic-access-key";
 import MessageModal from "@/src/components/modals/message-modal";
 
+// ✅ URL ထဲက /api/dak/<path> ကို သေချာဆွဲထုတ်ပေးတဲ့ helper
 function extractPath(url: string): string | null {
     try {
         const parsedUrl = new URL(url);
@@ -20,13 +29,13 @@ function extractPath(url: string): string | null {
         const pathSegments = path.split("/").filter((segment) => segment.length > 0);
 
         const dakIndex = pathSegments.indexOf("dak");
-
         if (dakIndex === -1 || dakIndex === pathSegments.length - 1) {
             return null;
         }
 
         return slugify(pathSegments[dakIndex + 1]);
-    } catch (error) {
+    } catch {
+        // URL မမှန်ရင် null ပြန်ပေး
         return null;
     }
 }
@@ -35,7 +44,6 @@ interface FormProps {
     accessKey: string;
 }
 
-// TODO: add captcha
 export default function DynamicAccessKeyStatsForm() {
     const form = useForm<FormProps>();
     const [stats, setStats] = useState<DynamicAccessKeyStats | null>();
@@ -51,8 +59,8 @@ export default function DynamicAccessKeyStatsForm() {
             } else {
                 setStats(null);
             }
-        } catch (error) {
-            setError((error as object).toString());
+        } catch (err) {
+            setError((err as object).toString());
             errorModalDisclosure.onOpen();
         }
     };
@@ -68,7 +76,9 @@ export default function DynamicAccessKeyStatsForm() {
                 body={
                     <div className="grid gap-2">
                         <span>တစ်ခုခုမှားသွားပါတယ်။</span>
-                        <pre className="text-sm break-words whitespace-pre-wrap text-danger-500">{error}</pre>
+                        <pre className="text-sm break-words whitespace-pre-wrap text-danger-500">
+                            {error}
+                        </pre>
                     </div>
                 }
                 disclosure={errorModalDisclosure}
@@ -100,10 +110,16 @@ export default function DynamicAccessKeyStatsForm() {
                     })}
                 />
 
-                <ButtonGroup className="w-[320px]" fullWidth={true}>
-                    <Button color="primary" isLoading={form.formState.isSubmitting} type="submit" variant="shadow">
+                <ButtonGroup className="w-[320px]" fullWidth>
+                    <Button
+                        color="primary"
+                        isLoading={form.formState.isSubmitting}
+                        type="submit"
+                        variant="shadow"
+                    >
                         စစ်မယ်
                     </Button>
+
                     {stats !== undefined && (
                         <Button variant="shadow" onPress={handleReset}>
                             ပြန်စမယ်

@@ -5,6 +5,8 @@ import DynamicAccessKeyForm from "@/src/components/dynamic-access-key-form";
 import { getServers } from "@/src/core/actions/server";
 import { getTags } from "@/src/core/actions/tags";
 
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
     title: createPageTitle("New Dynamic Access Key")
 };

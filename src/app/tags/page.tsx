@@ -13,5 +13,6 @@ export const metadata: Metadata = {
 
 export default async function TagsPage() {
     const tags = await getTags({});
+
     return <TagsList data={tags} />;
 }
