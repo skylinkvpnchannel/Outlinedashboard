@@ -10,7 +10,7 @@ interface Props {
 export default function HealthCheckListItem({ item }: Props) {
     const renderChannelName = () => {
         if (!item.notificationChannel || item.notificationChannel.type === "None") {
-            return "No Notification";
+            return "အသိပေးချက် မရှိပါ";
         }
 
         return item.notificationChannel.name + " (" + item.notificationChannel.type + ")";
@@ -28,34 +28,34 @@ export default function HealthCheckListItem({ item }: Props) {
             <CardBody>
                 <div className="grid gap-2 text-sm">
                     <div className="flex justify-between items-center gap-2">
-                        <span>Status:</span>
+                        <span>အခြေအနေ:</span>
                         {item.isAvailable ? (
                             <Chip color="success" radius="sm" size="sm" variant="flat">
-                                Available
+                                ရရှိနိုင်ပါသည်
                             </Chip>
                         ) : (
                             <Chip color="danger" radius="sm" size="sm" variant="flat">
-                                Not Available
+                                မရရှိနိုင်ပါ
                             </Chip>
                         )}
                     </div>
 
                     <div className="flex justify-between items-center gap-2">
-                        <span>Last check:</span>
+                        <span>နောက်ဆုံး စစ်ဆေးချိန်:</span>
                         <Chip radius="sm" size="sm" variant="flat">
-                            {item.lastCheckedAt?.toLocaleString() ?? "Not Checked Yet"}
+                            {item.lastCheckedAt?.toLocaleString() ?? "မစစ်ဆေးရသေးပါ"}
                         </Chip>
                     </div>
 
                     <div className="flex justify-between items-center gap-2">
-                        <span>Interval:</span>
+                        <span>ကြားကာလ:</span>
                         <Chip radius="sm" size="sm" variant="flat">
-                            Every {item.interval}m
+                            {item.interval} မိနစ်တိုင်း
                         </Chip>
                     </div>
 
                     <div className="flex justify-between items-center gap-2">
-                        <span>Notification:</span>
+                        <span>အသိပေးချက်:</span>
                         <Chip radius="sm" size="sm" variant="flat">
                             {renderChannelName()}
                         </Chip>
@@ -65,7 +65,7 @@ export default function HealthCheckListItem({ item }: Props) {
             <Divider />
             <CardFooter>
                 <Button as={Link} fullWidth={true} href={`/health-checks/${item.id}`} variant="flat">
-                    Edit
+                    ပြင်မယ်
                 </Button>
             </CardFooter>
         </Card>
