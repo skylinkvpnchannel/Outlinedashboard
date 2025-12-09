@@ -67,12 +67,12 @@ export default function DynamicAccessKeyStatsForm() {
             <MessageModal
                 body={
                     <div className="grid gap-2">
-                        <span>Something went wrong.</span>
+                        <span>တစ်ခုခုမှားသွားပါတယ်။</span>
                         <pre className="text-sm break-words whitespace-pre-wrap text-danger-500">{error}</pre>
                     </div>
                 }
                 disclosure={errorModalDisclosure}
-                title="Error!"
+                title="အမှား!"
             />
 
             <form
@@ -81,7 +81,9 @@ export default function DynamicAccessKeyStatsForm() {
             >
                 <div className="mb-8 text-foreground grid gap-2 place-items-center px-4">
                     <StatsIcon size={86} />
-                    <div className="text-center">Enter your access key to view your usage statistics</div>
+                    <div className="text-center">
+                        သင့် Access Key ကိုထည့်ပြီး သုံးစွဲမှုစာရင်းကို ကြည့်ရှုနိုင်ပါတယ်
+                    </div>
                 </div>
 
                 <Input
@@ -90,20 +92,21 @@ export default function DynamicAccessKeyStatsForm() {
                     errorMessage={form.formState.errors.accessKey?.message}
                     isInvalid={!!form.formState.errors.accessKey}
                     label="Access Key"
+                    placeholder="Access Key ကို ဒီမှာကူးထည့်ပါ"
                     variant="underlined"
                     {...form.register("accessKey", {
-                        required: true,
+                        required: "Access Key ထည့်ပါ",
                         maxLength: 512
                     })}
                 />
 
                 <ButtonGroup className="w-[320px]" fullWidth={true}>
                     <Button color="primary" isLoading={form.formState.isSubmitting} type="submit" variant="shadow">
-                        Check
+                        စစ်မယ်
                     </Button>
                     {stats !== undefined && (
                         <Button variant="shadow" onPress={handleReset}>
-                            Reset
+                            ပြန်စမယ်
                         </Button>
                     )}
                 </ButtonGroup>
@@ -115,23 +118,25 @@ export default function DynamicAccessKeyStatsForm() {
                         <CardHeader>
                             <div className="grid gap-1">
                                 <span className="max-w-[320px] truncate">{stats.name}</span>
-                                <span className="max-w-[320px] truncate text-foreground-400 text-sm">{stats.path}</span>
+                                <span className="max-w-[320px] truncate text-foreground-400 text-sm">
+                                    {stats.path}
+                                </span>
                             </div>
                         </CardHeader>
                         <CardBody className="text-sm grid gap-2">
                             <div className="flex gap-1 justify-between items-center">
-                                <span>Data usage</span>
+                                <span>ဒေတာသုံးစွဲမှု</span>
                                 <DynamicAccessKeyDataUsageChip item={stats} />
                             </div>
 
                             <div className="flex gap-1 justify-between items-center">
-                                <span>Validity</span>
+                                <span>သက်တမ်း</span>
                                 <DynamicAccessKeyValidityChip dak={stats} />
                             </div>
                         </CardBody>
                     </Card>
                 ) : (
-                    <NoResult />
+                    <NoResult message="ရလဒ်မတွေ့ပါ" />
                 ))}
         </div>
     );
