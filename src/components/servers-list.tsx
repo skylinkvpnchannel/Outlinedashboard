@@ -39,9 +39,7 @@ export default function ServersList({ data }: Props) {
 
     const handleSearch = async (data: SearchFormProps) => {
         const filteredServers = await getServersWithTags(
-            {
-                term: data.term
-            },
+            { term: data.term },
             true
         );
         setServers(filteredServers);
@@ -50,6 +48,8 @@ export default function ServersList({ data }: Props) {
     const handleRemoveServer = async () => {
         if (!serverToRemove) return;
         await removeServer(serverToRemove);
+        // optional: refresh list after delete if you want
+        // setServers((prev) => prev.filter((s) => s.id !== serverToRemove));
     };
 
     useEffect(() => {
@@ -63,7 +63,7 @@ export default function ServersList({ data }: Props) {
                     <div className="grid gap-2">
                         <span>ဒီ Server ကိုဖျက်ချင်တာ သေချာပြီလား?</span>
                         <p className="text-default-500 text-sm">
-                            ဒီလုပ်ဆောင်ချက်က {app.name} ရဲ့ database ထဲက ပဲ ဖျက်တာပါ။
+                            ဒီလုပ်ဆောင်ချက်က {app.name} ရဲ့ database ထဲကပဲ ဖျက်တာပါ။
                             Server ကိုကိုယ်တိုင်တော့ ထိခိုက်မှာ မဟုတ်ပါဘူး။
                         </p>
                     </div>
@@ -99,13 +99,29 @@ export default function ServersList({ data }: Props) {
                     </Button>
                 </div>
 
-                {/* ✅ grid layout: phone 1 col, tablet 2 col, desktop 3 col */}
-                <div className="grid gap-4 grid-cols-1 md:grid-cols-2 xl:grid-cols-3 place-items-center">
+                {/* ✅ responsive grid */}
+                <div
+                    className="
+                        grid gap-4
+                        grid-cols-1
+                        sm:grid-cols-2
+                        xl:grid-cols-3
+                        2xl:grid-cols-4
+                    "
+                >
                     {servers.map((item) => (
-                        <Card key={item.id} className="w-full md:w-[400px]">
+                        <Card
+                            key={item.id}
+                            className="
+                                w-full min-w-0
+                                rounded-2xl shadow-lg
+                                bg-content1/90
+                                border border-default-200/60
+                            "
+                        >
                             <CardHeader>
                                 <div className="grid gap-1">
-                                    <span className="max-w-[360px] truncate font-medium">
+                                    <span className="truncate font-medium">
                                         {item.name}
                                     </span>
                                 </div>
@@ -190,7 +206,13 @@ export default function ServersList({ data }: Props) {
                             </CardBody>
 
                             <CardFooter>
-                                <ButtonGroup color="default" fullWidth={true} size="sm" variant="flat">
+                                <ButtonGroup
+                                    color="default"
+                                    fullWidth
+                                    size="sm"
+                                    variant="flat"
+                                    className="!flex-nowrap"
+                                >
                                     <Button as={Link} href={`/servers/${item.id}/access-keys`}>
                                         Access Keys
                                     </Button>
