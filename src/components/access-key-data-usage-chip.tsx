@@ -15,16 +15,49 @@ export default function AccessKeyDataUsageChip({ item }: Props) {
     const dataLimitInBytes = Number(item.dataLimit) * bytesPerMB;
     const isExceeded = item.dataLimit && item.dataUsage >= dataLimitInBytes;
 
-    return (
-        <Chip color={isExceeded ? "danger" : "default"} radius="sm" size="sm" variant="flat">
-            <div className="flex gap-2 items-center">
-                <span>{formatBytes(Number(item.dataUsage))}</span>
+    const usedText = formatBytes(Number(item.dataUsage));
+    const limitText = item.dataLimit
+        ? formatBytes(convertDataLimitToUnit(Number(item.dataLimit), DataLimitUnit.MB))
+        : null;
 
-                <span className="text-default-500">of</span>
-                {item.dataLimit ? (
-                    <span>{formatBytes(convertDataLimitToUnit(Number(item.dataLimit), DataLimitUnit.MB))}</span>
+    return (
+        <Chip
+            color={isExceeded ? "danger" : item.dataLimit ? "primary" : "default"}
+            radius="sm"
+            size="sm"
+            variant="flat"
+            className={[
+                "px-2 py-1",
+                "bg-content2/70 border border-default-200/60",
+                "backdrop-blur-md",
+                "transition-transform duration-200 hover:scale-[1.03]",
+                isExceeded ? "shadow-sm shadow-danger/30" : "shadow-sm shadow-primary/20"
+            ].join(" ")}
+        >
+            <div className="flex gap-2 items-center text-[12.5px] font-medium">
+                {/* Used */}
+                <span className="text-foreground">{usedText}</span>
+
+                {/* of / total label */}
+                <span className="text-default-500 text-[11px] font-semibold">
+                    / စုစုပေါင်း
+                </span>
+
+                {/* Limit */}
+                {limitText ? (
+                    <span className="text-foreground">{limitText}</span>
                 ) : (
-                    <InfinityIcon size={20} />
+                    <span className="flex items-center gap-1 text-foreground">
+                        <InfinityIcon size={18} />
+                        <span className="text-default-500 text-[11px] font-semibold">Limit မရှိ</span>
+                    </span>
+                )}
+
+                {/* Exceeded badge */}
+                {isExceeded && (
+                    <span className="ml-1 text-[10px] font-bold text-danger-600 bg-danger-50 px-1.5 py-0.5 rounded-md">
+                        ကျော်လွန်
+                    </span>
                 )}
             </div>
         </Chip>
