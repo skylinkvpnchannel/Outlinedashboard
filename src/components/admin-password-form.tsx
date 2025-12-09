@@ -67,10 +67,10 @@ export default function AdminPasswordForm() {
                 {/* Show password toggle */}
                 <label className="flex items-center gap-2 text-sm text-default-600 select-none">
                     <input
-                        type="checkbox"
                         checked={showPassword}
-                        onChange={(e) => setShowPassword(e.target.checked)}
                         className="accent-primary"
+                        type="checkbox"
+                        onChange={(e) => setShowPassword(e.target.checked)}
                     />
                     စကားဝှက်ကို မြင်အောင်ပြမယ်
                 </label>
@@ -87,9 +87,7 @@ export default function AdminPasswordForm() {
                 </Button>
 
                 {/* Footer hint */}
-                <p className="text-xs text-default-400 text-center pt-1">
-                    စကားဝှက်ကို မေ့မရအောင် မှတ်ထားပါနော်။
-                </p>
+                <p className="text-xs text-default-400 text-center pt-1">စကားဝှက်ကို မေ့မရအောင် မှတ်ထားပါနော်။</p>
             </form>
         </div>
     );

@@ -56,13 +56,7 @@ export default function DynamicAccessKeyAccessKeysForm({ dynamicAccessKey, serve
                 <section className="flex justify-between items-center gap-2">
                     <section className="flex items-center gap-2">
                         <Tooltip closeDelay={100} color="default" content="နောက်သို့" delay={600} size="sm">
-                            <Button
-                                as={Link}
-                                href="/dynamic-access-keys"
-                                isIconOnly={true}
-                                size="sm"
-                                variant="light"
-                            >
+                            <Button as={Link} href="/dynamic-access-keys" isIconOnly={true} size="sm" variant="light">
                                 <ArrowLeftIcon size={20} />
                             </Button>
                         </Tooltip>
@@ -86,10 +80,7 @@ export default function DynamicAccessKeyAccessKeysForm({ dynamicAccessKey, serve
                 </section>
 
                 <section className="grid gap-6 p-2 xl:px-10">
-                    <CheckboxGroup
-                        defaultValue={form.getValues("accessKeys")}
-                        onChange={handleSelection}
-                    >
+                    <CheckboxGroup defaultValue={form.getValues("accessKeys")} onChange={handleSelection}>
                         <div className="flex justify-center flex-wrap gap-8">
                             {servers?.map((server) => (
                                 <Card key={server.id} className="w-[360px]">

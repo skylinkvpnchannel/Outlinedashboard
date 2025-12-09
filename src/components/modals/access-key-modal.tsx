@@ -1,13 +1,5 @@
 import { UseDisclosureReturn } from "@heroui/use-disclosure";
-import {
-    Button,
-    Modal,
-    ModalBody,
-    ModalContent,
-    ModalFooter,
-    ModalHeader,
-    Snippet
-} from "@heroui/react";
+import { Button, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, Snippet } from "@heroui/react";
 import React, { useEffect, useRef } from "react";
 
 import { CopyIcon } from "@/src/components/icons";
@@ -30,9 +22,6 @@ export default function AccessKeyModal({ disclosure, value }: Props) {
 
     return (
         <Modal
-            isOpen={disclosure.isOpen}
-            onOpenChange={disclosure.onOpenChange}
-            placement="center"
             backdrop="blur"
             classNames={{
                 base: "rounded-2xl shadow-2xl border border-default-200/60 bg-content1/95",
@@ -40,6 +29,9 @@ export default function AccessKeyModal({ disclosure, value }: Props) {
                 body: "pt-2",
                 footer: "pt-2"
             }}
+            isOpen={disclosure.isOpen}
+            placement="center"
+            onOpenChange={disclosure.onOpenChange}
         >
             <ModalContent>
                 <ModalHeader className="flex items-center gap-2">
@@ -62,10 +54,7 @@ export default function AccessKeyModal({ disclosure, value }: Props) {
                                 "transition-transform duration-200 hover:scale-[1.02]"
                             ].join(" ")}
                         >
-                            <div
-                                ref={qrCodeContainerRef}
-                                className="rounded-xl overflow-hidden bg-white"
-                            />
+                            <div ref={qrCodeContainerRef} className="rounded-xl overflow-hidden bg-white" />
                         </div>
                     </div>
 
@@ -85,25 +74,19 @@ export default function AccessKeyModal({ disclosure, value }: Props) {
                         >
                             {value ?? "Key မရရှိသေးပါ"}
                         </Snippet>
-                        <span className="text-[11px] text-default-400">
-                            “Copy” ကိုနှိပ်ပြီး မျှဝေနိုင်ပါတယ်
-                        </span>
+                        <span className="text-[11px] text-default-400">“Copy” ကိုနှိပ်ပြီး မျှဝေနိုင်ပါတယ်</span>
                     </div>
                 </ModalBody>
 
                 <ModalFooter className="flex justify-end gap-2">
-                    <Button
-                        variant="light"
-                        onPress={disclosure.onClose}
-                        className="rounded-xl"
-                    >
+                    <Button className="rounded-xl" variant="light" onPress={disclosure.onClose}>
                         ပိတ်မယ်
                     </Button>
                     <Button
+                        className="rounded-xl font-semibold"
                         color="primary"
                         variant="shadow"
                         onPress={disclosure.onClose}
-                        className="rounded-xl font-semibold"
                     >
                         အိုကေ
                     </Button>

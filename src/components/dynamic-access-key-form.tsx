@@ -278,13 +278,13 @@ export default function DynamicAccessKeyForm({ dynamicAccessKey, tags, servers }
                     {selectedExpirationDate && (
                         <div className="flex gap-2">
                             <Button
+                                aria-label="သက်တမ်းကုန်ရက် ဖျက်မယ်"
                                 color="danger"
                                 isIconOnly={true}
                                 radius="sm"
                                 size="lg"
                                 variant="faded"
                                 onPress={() => setSelectedExpirationDate(undefined)}
-                                aria-label="သက်တမ်းကုန်ရက် ဖျက်မယ်"
                             >
                                 <DeleteIcon size={18} />
                             </Button>
@@ -433,8 +433,8 @@ export default function DynamicAccessKeyForm({ dynamicAccessKey, tags, servers }
                                     ကိုယ်တိုင် ရွေးရပါမယ်။
                                 </li>
                                 <li>
-                                    <strong className="text-warning">Tag (အကြံပြု):</strong> သတ်မှတ်ထားတဲ့ Tag တွေ
-                                    ပါတဲ့ Server တွေကို စနစ်က အလိုအလျောက် Pool ထဲထည့်ပေးပါမယ်။
+                                    <strong className="text-warning">Tag (အကြံပြု):</strong> သတ်မှတ်ထားတဲ့ Tag တွေ ပါတဲ့
+                                    Server တွေကို စနစ်က အလိုအလျောက် Pool ထဲထည့်ပေးပါမယ်။
                                 </li>
                             </ul>
 
@@ -447,6 +447,7 @@ export default function DynamicAccessKeyForm({ dynamicAccessKey, tags, servers }
                                         label="Pool ထဲထည့်မယ့် Server ကိုရွေးပါ"
                                         onValueChange={(values) => {
                                             const ids = values.map((x) => parseInt(x));
+
                                             form.setValue("serverPoolValue", JSON.stringify(ids));
                                         }}
                                     >
@@ -495,6 +496,7 @@ export default function DynamicAccessKeyForm({ dynamicAccessKey, tags, servers }
                                         label="Pool အတွက် Tag ရွေးပါ"
                                         onValueChange={(values) => {
                                             const ids = values.map((x) => parseInt(x));
+
                                             form.setValue("serverPoolValue", JSON.stringify(ids));
                                         }}
                                     >

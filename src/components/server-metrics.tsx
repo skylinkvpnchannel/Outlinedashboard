@@ -1,17 +1,6 @@
 "use client";
 
-import {
-    Alert,
-    Button,
-    Card,
-    CardBody,
-    CardHeader,
-    Chip,
-    Divider,
-    Link,
-    Skeleton,
-    Tooltip
-} from "@heroui/react";
+import { Alert, Button, Card, CardBody, CardHeader, Chip, Divider, Link, Skeleton, Tooltip } from "@heroui/react";
 import React, { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { Server } from "@prisma/client";
@@ -79,10 +68,11 @@ export default function ServerMetrics({ server }: Props) {
 
                 <section className="grid gap-4 xl:px-4">
                     <p className="text-foreground-500">
-                        ကျွန်တော်တို့က သုံးစွဲသူ들의 ကိုယ်ရေးကိုယ်တာလုံခြုံရေးနဲ့ အချက်အလက်လုံခြုံရေးကို အလွန်အရေးပါပြီး ကာကွယ်ထားပါတယ်။
-                        Outline Server တိုင်းက သုံးစွဲမှုအချက်အလက်တွေကို စုစည်းပြီး အမည်မဖော်နိုင်တဲ့ပုံစံနဲ့ အလိုအလျောက်ရယူထားပါတယ်။
-                        ဒီအချက်အလက်တွေထဲမှာ သုံးစွဲသူတွေ သွားရောက်တဲ့ ဝဘ်ဆိုဒ်တွေ၊ သူတို့ရဲ့ ဆက်သွယ်ရေးအကြောင်းအရာတွေ မပါဝင်ပါဘူး။
-                        ထို့အပြင် Server Admin အနေနဲ့ မင်းက ကိုယ်တိုင် မျှဝေဖို့ ရွေးချယ်မှသာ Outline အဖွဲ့နဲ့ မျှဝေသွားမှာပါ။{" "}
+                        ကျွန်တော်တို့က သုံးစွဲသူ들의 ကိုယ်ရေးကိုယ်တာလုံခြုံရေးနဲ့ အချက်အလက်လုံခြုံရေးကို အလွန်အရေးပါပြီး
+                        ကာကွယ်ထားပါတယ်။ Outline Server တိုင်းက သုံးစွဲမှုအချက်အလက်တွေကို စုစည်းပြီး
+                        အမည်မဖော်နိုင်တဲ့ပုံစံနဲ့ အလိုအလျောက်ရယူထားပါတယ်။ ဒီအချက်အလက်တွေထဲမှာ သုံးစွဲသူတွေ သွားရောက်တဲ့
+                        ဝဘ်ဆိုဒ်တွေ၊ သူတို့ရဲ့ ဆက်သွယ်ရေးအကြောင်းအရာတွေ မပါဝင်ပါဘူး။ ထို့အပြင် Server Admin အနေနဲ့ မင်းက
+                        ကိုယ်တိုင် မျှဝေဖို့ ရွေးချယ်မှသာ Outline အဖွဲ့နဲ့ မျှဝေသွားမှာပါ။{" "}
                         <Link href={app.links.outlineVpn.dataCollectionPolicy} target="_blank">
                             ပိုမိုလေ့လာရန်
                         </Link>
@@ -188,7 +178,8 @@ export default function ServerMetrics({ server }: Props) {
                                             </Chip>
 
                                             <span className="text-foreground-400 text-sm">
-                                                ဒီအပိုင်းက နောက်ဆုံး ၃၀ ရက်အတွင်း Server မှတစ်ဆင့် လွှဲပြောင်းသွားတဲ့ data စုစုပေါင်းကို ပြထားတာပါ။
+                                                ဒီအပိုင်းက နောက်ဆုံး ၃၀ ရက်အတွင်း Server မှတစ်ဆင့် လွှဲပြောင်းသွားတဲ့
+                                                data စုစုပေါင်းကို ပြထားတာပါ။
                                             </span>
                                         </CardBody>
                                     </Card>

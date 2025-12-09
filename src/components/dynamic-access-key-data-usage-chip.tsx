@@ -26,11 +26,7 @@ export default function DynamicAccessKeyDataUsageChip({ item }: Props) {
                     <>
                         <span className="text-default-500">မှ</span>
                         {item.dataLimit ? (
-                            <span>
-                                {formatBytes(
-                                    convertDataLimitToUnit(Number(item.dataLimit), DataLimitUnit.MB)
-                                )}
-                            </span>
+                            <span>{formatBytes(convertDataLimitToUnit(Number(item.dataLimit), DataLimitUnit.MB))}</span>
                         ) : (
                             <InfinityIcon size={20} />
                         )}

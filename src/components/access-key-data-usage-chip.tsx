@@ -22,10 +22,6 @@ export default function AccessKeyDataUsageChip({ item }: Props) {
 
     return (
         <Chip
-            color={isExceeded ? "danger" : item.dataLimit ? "primary" : "default"}
-            radius="sm"
-            size="sm"
-            variant="flat"
             className={[
                 "px-2 py-1",
                 "bg-content2/70 border border-default-200/60",
@@ -33,15 +29,17 @@ export default function AccessKeyDataUsageChip({ item }: Props) {
                 "transition-transform duration-200 hover:scale-[1.03]",
                 isExceeded ? "shadow-sm shadow-danger/30" : "shadow-sm shadow-primary/20"
             ].join(" ")}
+            color={isExceeded ? "danger" : item.dataLimit ? "primary" : "default"}
+            radius="sm"
+            size="sm"
+            variant="flat"
         >
             <div className="flex gap-2 items-center text-[12.5px] font-medium">
                 {/* Used */}
                 <span className="text-foreground">{usedText}</span>
 
                 {/* of / total label */}
-                <span className="text-default-500 text-[11px] font-semibold">
-                    / စုစုပေါင်း
-                </span>
+                <span className="text-default-500 text-[11px] font-semibold">/ စုစုပေါင်း</span>
 
                 {/* Limit */}
                 {limitText ? (

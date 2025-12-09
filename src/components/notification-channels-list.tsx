@@ -164,7 +164,13 @@ export default function NotificationChannelsList({ data }: Props) {
 
                                 <TableCell>
                                     <div className="flex gap-2 justify-center items-center">
-                                        <Tooltip closeDelay={100} color="primary" content="ပြင်မယ်" delay={600} size="sm">
+                                        <Tooltip
+                                            closeDelay={100}
+                                            color="primary"
+                                            content="ပြင်မယ်"
+                                            delay={600}
+                                            size="sm"
+                                        >
                                             <Button
                                                 as={Link}
                                                 color="primary"
@@ -177,7 +183,13 @@ export default function NotificationChannelsList({ data }: Props) {
                                             </Button>
                                         </Tooltip>
 
-                                        <Tooltip closeDelay={100} color="danger" content="ဖျက်မယ်" delay={600} size="sm">
+                                        <Tooltip
+                                            closeDelay={100}
+                                            color="danger"
+                                            content="ဖျက်မယ်"
+                                            delay={600}
+                                            size="sm"
+                                        >
                                             <Button
                                                 color="danger"
                                                 isIconOnly={true}

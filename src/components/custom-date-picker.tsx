@@ -25,6 +25,7 @@ export default function CustomDatePicker({ label, value, onChange }: Props) {
         if (v) {
             const month = String(v.month).padStart(2, "0");
             const day = String(v.day).padStart(2, "0");
+
             onChange(`${v.year}-${month}-${day}`);
         } else {
             onChange(undefined);
@@ -48,6 +49,7 @@ export default function CustomDatePicker({ label, value, onChange }: Props) {
 
             {/* Pretty trigger button */}
             <Button
+                fullWidth
                 className={[
                     "col-start-1 row-start-1 text-sm w-full justify-between",
                     "transition-all duration-200 ease-out",
@@ -57,13 +59,8 @@ export default function CustomDatePicker({ label, value, onChange }: Props) {
                     "rounded-xl px-4",
                     isHovered ? "translate-y-[-1px]" : ""
                 ].join(" ")}
-                fullWidth
                 radius="sm"
                 size="lg"
-                variant="flat"
-                onPress={openCalendar}
-                onMouseEnter={() => setIsHovered(true)}
-                onMouseLeave={() => setIsHovered(false)}
                 startContent={
                     <span
                         className={[
@@ -76,28 +73,22 @@ export default function CustomDatePicker({ label, value, onChange }: Props) {
                         <CalendarBoldIcon height={18} width={18} />
                     </span>
                 }
+                variant="flat"
+                onMouseEnter={() => setIsHovered(true)}
+                onMouseLeave={() => setIsHovered(false)}
+                onPress={openCalendar}
             >
                 <div className="flex flex-col items-start gap-0.5">
-                    {label && (
-                        <span className="text-default-500 text-xs">
-                            {label}
-                        </span>
-                    )}
+                    {label && <span className="text-default-500 text-xs">{label}</span>}
                     {value ? (
-                        <span className="text-foreground font-medium tracking-wide">
-                            {value}
-                        </span>
+                        <span className="text-foreground font-medium tracking-wide">{value}</span>
                     ) : (
-                        <span className="text-default-400">
-                            ရက်စွဲရွေးပါ (YYYY-MM-DD)
-                        </span>
+                        <span className="text-default-400">ရက်စွဲရွေးပါ (YYYY-MM-DD)</span>
                     )}
                 </div>
 
                 {/* Right side hint */}
-                <span className="text-xs text-default-400">
-                    Calendar ဖွင့်ရန်
-                </span>
+                <span className="text-xs text-default-400">Calendar ဖွင့်ရန်</span>
             </Button>
         </div>
     );

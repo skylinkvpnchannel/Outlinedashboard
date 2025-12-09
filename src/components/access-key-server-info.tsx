@@ -25,22 +25,19 @@ export default function AccessKeyServerInfo({ server, numberOfKeys }: Props) {
         >
             {/* Host/IP */}
             <div className="flex justify-between items-center gap-3">
-                <span className="text-xs md:text-sm text-default-500 font-medium">
-                    Host / IP
-                </span>
+                <span className="text-xs md:text-sm text-default-500 font-medium">Host / IP</span>
 
                 <Snippet
+                    hideSymbol
                     classNames={{
                         base:
                             "!max-w-[300px] bg-default-100/70 border border-default-200/60 " +
                             "rounded-lg transition hover:scale-[1.01]",
                         copyButton:
-                            "text-sm !min-w-7 !w-7 h-7 rounded-md " +
-                            "bg-content2 hover:bg-content3 transition",
+                            "text-sm !min-w-7 !w-7 h-7 rounded-md " + "bg-content2 hover:bg-content3 transition",
                         pre: "!ps-1 truncate text-foreground font-medium"
                     }}
                     copyIcon={<CopyIcon size={16} />}
-                    hideSymbol
                     size="sm"
                     variant="flat"
                 >
@@ -50,22 +47,19 @@ export default function AccessKeyServerInfo({ server, numberOfKeys }: Props) {
 
             {/* Port */}
             <div className="flex justify-between items-center gap-3">
-                <span className="text-xs md:text-sm text-default-500 font-medium">
-                    Port
-                </span>
+                <span className="text-xs md:text-sm text-default-500 font-medium">Port</span>
 
                 <Snippet
+                    hideSymbol
                     classNames={{
                         base:
                             "!max-w-[200px] bg-default-100/70 border border-default-200/60 " +
                             "rounded-lg transition hover:scale-[1.01]",
                         copyButton:
-                            "text-sm !min-w-7 !w-7 h-7 rounded-md " +
-                            "bg-content2 hover:bg-content3 transition",
+                            "text-sm !min-w-7 !w-7 h-7 rounded-md " + "bg-content2 hover:bg-content3 transition",
                         pre: "!ps-1 truncate text-foreground font-medium"
                     }}
                     copyIcon={<CopyIcon size={16} />}
-                    hideSymbol
                     size="sm"
                     variant="flat"
                 >
@@ -75,21 +69,19 @@ export default function AccessKeyServerInfo({ server, numberOfKeys }: Props) {
 
             {/* Status */}
             <div className="flex justify-between items-center gap-3">
-                <span className="text-xs md:text-sm text-default-500 font-medium">
-                    အခြေအနေ
-                </span>
+                <span className="text-xs md:text-sm text-default-500 font-medium">အခြေအနေ</span>
 
                 <Chip
-                    color={isUp ? "success" : "danger"}
-                    radius="sm"
-                    size="sm"
-                    variant="flat"
                     className={
                         "font-semibold tracking-wide " +
                         (isUp
                             ? "bg-success-50 text-success-700 dark:bg-success/15 dark:text-success-300"
                             : "bg-danger-50 text-danger-700 dark:bg-danger/15 dark:text-danger-300")
                     }
+                    color={isUp ? "success" : "danger"}
+                    radius="sm"
+                    size="sm"
+                    variant="flat"
                 >
                     {isUp ? "Online" : "Offline"}
                 </Chip>
@@ -97,15 +89,13 @@ export default function AccessKeyServerInfo({ server, numberOfKeys }: Props) {
 
             {/* Version */}
             <div className="flex justify-between items-center gap-3">
-                <span className="text-xs md:text-sm text-default-500 font-medium">
-                    Version
-                </span>
+                <span className="text-xs md:text-sm text-default-500 font-medium">Version</span>
 
                 <Chip
+                    className="bg-default-100/70 border border-default-200/60 font-medium"
                     radius="sm"
                     size="sm"
                     variant="flat"
-                    className="bg-default-100/70 border border-default-200/60 font-medium"
                 >
                     {server.version}
                 </Chip>
@@ -113,15 +103,13 @@ export default function AccessKeyServerInfo({ server, numberOfKeys }: Props) {
 
             {/* Number of keys */}
             <div className="flex justify-between items-center gap-3">
-                <span className="text-xs md:text-sm text-default-500 font-medium">
-                    Key အရေအတွက်
-                </span>
+                <span className="text-xs md:text-sm text-default-500 font-medium">Key အရေအတွက်</span>
 
                 <Chip
+                    className="bg-default-100/70 border border-default-200/60 font-semibold"
                     radius="sm"
                     size="sm"
                     variant="flat"
-                    className="bg-default-100/70 border border-default-200/60 font-semibold"
                 >
                     {numberOfKeys}
                 </Chip>
@@ -129,15 +117,13 @@ export default function AccessKeyServerInfo({ server, numberOfKeys }: Props) {
 
             {/* Total usage */}
             <div className="flex justify-between items-center gap-3">
-                <span className="text-xs md:text-sm text-default-500 font-medium">
-                    အသုံးပြုမှု စုစုပေါင်း
-                </span>
+                <span className="text-xs md:text-sm text-default-500 font-medium">အသုံးပြုမှု စုစုပေါင်း</span>
 
                 <Chip
+                    className="bg-default-100/70 border border-default-200/60 font-semibold"
                     radius="sm"
                     size="sm"
                     variant="flat"
-                    className="bg-default-100/70 border border-default-200/60 font-semibold"
                 >
                     {formatBytes(Number(server.totalDataUsage))}
                 </Chip>
@@ -145,16 +131,14 @@ export default function AccessKeyServerInfo({ server, numberOfKeys }: Props) {
 
             {/* Creation date */}
             <div className="flex justify-between items-center gap-3">
-                <span className="text-xs md:text-sm text-default-500 font-medium">
-                    ဖန်တီးထားသည့်နေ့
-                </span>
+                <span className="text-xs md:text-sm text-default-500 font-medium">ဖန်တီးထားသည့်နေ့</span>
 
                 <Tooltip closeDelay={200} content={moment(server.apiCreatedAt).fromNow()} delay={600} size="sm">
                     <Chip
+                        className="bg-default-100/70 border border-default-200/60 font-medium cursor-help"
                         radius="sm"
                         size="sm"
                         variant="flat"
-                        className="bg-default-100/70 border border-default-200/60 font-medium cursor-help"
                     >
                         {moment(server.apiCreatedAt).format("YYYY-MM-DD HH:mm:ss")}
                     </Chip>
@@ -163,22 +147,19 @@ export default function AccessKeyServerInfo({ server, numberOfKeys }: Props) {
 
             {/* Management URL */}
             <div className="flex flex-wrap justify-between items-center gap-3">
-                <span className="text-xs md:text-sm text-default-500 font-medium">
-                    Management URL
-                </span>
+                <span className="text-xs md:text-sm text-default-500 font-medium">Management URL</span>
 
                 <Snippet
+                    hideSymbol
                     classNames={{
                         base:
                             "!max-w-[280px] md:!max-w-[300px] bg-default-100/70 border border-default-200/60 " +
                             "rounded-lg transition hover:scale-[1.01]",
                         copyButton:
-                            "text-sm !min-w-7 !w-7 h-7 rounded-md " +
-                            "bg-content2 hover:bg-content3 transition",
+                            "text-sm !min-w-7 !w-7 h-7 rounded-md " + "bg-content2 hover:bg-content3 transition",
                         pre: "!ps-1 truncate text-foreground font-medium"
                     }}
                     copyIcon={<CopyIcon size={16} />}
-                    hideSymbol
                     size="sm"
                     title={server.apiUrl}
                     variant="flat"
@@ -189,22 +170,19 @@ export default function AccessKeyServerInfo({ server, numberOfKeys }: Props) {
 
             {/* Management JSON */}
             <div className="flex flex-wrap justify-between items-center gap-3 md:col-span-2">
-                <span className="text-xs md:text-sm text-default-500 font-medium">
-                    Management JSON
-                </span>
+                <span className="text-xs md:text-sm text-default-500 font-medium">Management JSON</span>
 
                 <Snippet
+                    hideSymbol
                     classNames={{
                         base:
                             "!max-w-[280px] md:!max-w-[700px] bg-default-100/70 border border-default-200/60 " +
                             "rounded-lg transition hover:scale-[1.01]",
                         copyButton:
-                            "text-sm !min-w-7 !w-7 h-7 rounded-md " +
-                            "bg-content2 hover:bg-content3 transition",
+                            "text-sm !min-w-7 !w-7 h-7 rounded-md " + "bg-content2 hover:bg-content3 transition",
                         pre: "!ps-1 truncate text-foreground font-medium"
                     }}
                     copyIcon={<CopyIcon size={16} />}
-                    hideSymbol
                     size="sm"
                     title={server.managementJson}
                     variant="flat"
@@ -215,24 +193,22 @@ export default function AccessKeyServerInfo({ server, numberOfKeys }: Props) {
 
             {/* Tags */}
             <div className="flex flex-wrap justify-between items-center gap-3 md:col-span-2">
-                <span className="text-xs md:text-sm text-default-500 font-medium">
-                    Tags
-                </span>
+                <span className="text-xs md:text-sm text-default-500 font-medium">Tags</span>
 
                 {server.tags.length > 0 ? (
                     <div className="flex gap-2 justify-end items-center flex-wrap">
                         {server.tags.map((t) => (
                             <Chip
                                 key={t.tag.id}
-                                color="default"
-                                radius="sm"
-                                size="sm"
-                                variant="flat"
                                 className="
                                     bg-content2/70 border border-default-200/60
                                     hover:bg-content3 transition
                                     font-medium
                                 "
+                                color="default"
+                                radius="sm"
+                                size="sm"
+                                variant="flat"
                             >
                                 #{t.tag.name}
                             </Chip>

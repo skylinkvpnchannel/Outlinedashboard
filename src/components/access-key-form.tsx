@@ -68,6 +68,7 @@ export default function AccessKeyForm({ serverId, accessKeyData }: Props) {
 
             if (accessKeyData) {
                 const updateData = data as EditAccessKeyRequest;
+
                 updateData.id = accessKeyData.id;
                 await updateAccessKey(updateData);
             } else {
@@ -130,10 +131,10 @@ export default function AccessKeyForm({ serverId, accessKeyData }: Props) {
                         <Button
                             isIconOnly
                             as={Link}
+                            className="rounded-full hover:bg-content2 transition"
                             href={`/servers/${serverId}/access-keys`}
                             size="sm"
                             variant="light"
-                            className="rounded-full hover:bg-content2 transition"
                         >
                             <ArrowLeftIcon size={20} />
                         </Button>
@@ -155,15 +156,15 @@ export default function AccessKeyForm({ serverId, accessKeyData }: Props) {
                 >
                     {/* Name */}
                     <Input
+                        classNames={{
+                            inputWrapper: "transition focus-within:scale-[1.01]"
+                        }}
                         errorMessage={form.formState.errors.name?.message}
                         isInvalid={!!form.formState.errors.name}
                         label="Key နာမည်"
                         placeholder="ဥပမာ: My Key 1"
                         size="sm"
                         variant="underlined"
-                        classNames={{
-                            inputWrapper: "transition focus-within:scale-[1.01]"
-                        }}
                         {...form.register("name", {
                             required: "နာမည်ထည့်ပေးပါ",
                             maxLength: {
@@ -175,18 +176,18 @@ export default function AccessKeyForm({ serverId, accessKeyData }: Props) {
 
                     {/* Data Limit */}
                     <Input
+                        classNames={{
+                            inputWrapper: "transition focus-within:scale-[1.01]"
+                        }}
+                        description="မထည့်ထားရင် Limit မရှိပါ"
                         endContent={<span className="text-default-500 text-xs font-semibold">MB</span>}
                         errorMessage={form.formState.errors.dataLimit?.message}
                         isInvalid={!!form.formState.errors.dataLimit}
                         label="Data Limit (ရွေးချယ်နိုင်)"
-                        description="မထည့်ထားရင် Limit မရှိပါ"
                         placeholder="ဥပမာ: 1024"
                         size="sm"
                         type="number"
                         variant="underlined"
-                        classNames={{
-                            inputWrapper: "transition focus-within:scale-[1.01]"
-                        }}
                         {...form.register("dataLimit", {
                             required: false,
                             min: 0,
@@ -202,12 +203,12 @@ export default function AccessKeyForm({ serverId, accessKeyData }: Props) {
                     <div className="flex gap-2 items-end">
                         {selectedExpirationDate && (
                             <Button
-                                color="danger"
                                 isIconOnly
+                                className="shrink-0 hover:scale-105 transition"
+                                color="danger"
                                 radius="sm"
                                 size="lg"
                                 variant="faded"
-                                className="shrink-0 hover:scale-105 transition"
                                 onPress={() => setSelectedExpirationDate(undefined)}
                             >
                                 <DeleteIcon size={18} />
@@ -225,6 +226,7 @@ export default function AccessKeyForm({ serverId, accessKeyData }: Props) {
                     <Dropdown>
                         <DropdownTrigger>
                             <Button
+                                fullWidth
                                 className="
                                     bg-default-100/70 border border-default-200/60 text-sm
                                     rounded-xl justify-between
@@ -234,7 +236,6 @@ export default function AccessKeyForm({ serverId, accessKeyData }: Props) {
                                 size="lg"
                                 type="button"
                                 variant="ghost"
-                                fullWidth
                             >
                                 {selectedPrefix ? `Prefix: ${selectedPrefix}` : "Prefix ရွေးရန်"}
                             </Button>
@@ -268,10 +269,10 @@ export default function AccessKeyForm({ serverId, accessKeyData }: Props) {
                                 )!.recommendedPorts.map((port) => (
                                     <Chip
                                         key={port.number}
+                                        className="font-medium"
                                         color="secondary"
                                         size="sm"
                                         variant="flat"
-                                        className="font-medium"
                                     >
                                         {port.number} ({port.description})
                                     </Chip>
@@ -282,11 +283,11 @@ export default function AccessKeyForm({ serverId, accessKeyData }: Props) {
 
                     {/* Save Button */}
                     <Button
+                        className="rounded-xl font-semibold tracking-wide hover:scale-[1.01] transition"
                         color="primary"
                         isLoading={!errorMessage && (form.formState.isSubmitting || form.formState.isSubmitSuccessful)}
                         type="submit"
                         variant="shadow"
-                        className="rounded-xl font-semibold tracking-wide hover:scale-[1.01] transition"
                     >
                         သိမ်းမယ်
                     </Button>

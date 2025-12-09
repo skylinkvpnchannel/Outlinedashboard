@@ -1,15 +1,6 @@
 "use client";
 
-import {
-    Button,
-    Checkbox,
-    CheckboxGroup,
-    Divider,
-    Input,
-    Link,
-    Tooltip,
-    useDisclosure
-} from "@heroui/react";
+import { Button, Checkbox, CheckboxGroup, Divider, Input, Link, Tooltip, useDisclosure } from "@heroui/react";
 import React, { useState } from "react";
 import { Tag } from "@prisma/client";
 import { useForm } from "react-hook-form";
@@ -73,9 +64,7 @@ export default function ServerEditForm({ server, tags }: Props) {
                 body={
                     <div className="grid gap-2">
                         <span>Server ကို မပြင်နိုင်ပါ။ တစ်ခုခုမှားယွင်းနေပါတယ်။</span>
-                        <pre className="text-sm break-words whitespace-pre-wrap text-danger-500">
-                            {serverError}
-                        </pre>
+                        <pre className="text-sm break-words whitespace-pre-wrap text-danger-500">{serverError}</pre>
                     </div>
                 }
                 disclosure={updateErrorModalDisclosure}
@@ -87,8 +76,8 @@ export default function ServerEditForm({ server, tags }: Props) {
                     <div className="grid gap-2">
                         <span>ဒီ Server ကို ဖျက်ချင်တာ သေချာပြီလား?</span>
                         <p className="text-default-500 text-sm">
-                            ဒီလုပ်ဆောင်ချက်က {app.name} ရဲ့ database ထဲက ပဲ ဖျက်တာပါ။
-                            Server ကိုကိုယ်တိုင်တော့ ထိခိုက်မှာ မဟုတ်ပါဘူး။
+                            ဒီလုပ်ဆောင်ချက်က {app.name} ရဲ့ database ထဲက ပဲ ဖျက်တာပါ။ Server ကိုကိုယ်တိုင်တော့
+                            ထိခိုက်မှာ မဟုတ်ပါဘူး။
                         </p>
                     </div>
                 }
@@ -191,8 +180,8 @@ export default function ServerEditForm({ server, tags }: Props) {
                 <div className="p-2 grid gap-4">
                     <span className="text-lg">Server ဖျက်မယ်</span>
                     <p className="text-default-500 text-sm">
-                        ဒီလုပ်ဆောင်ချက်က {app.name}&apos;s database ထဲက ပဲ ဖျက်တာပါ။
-                        Server ကိုကိုယ်တိုင်တော့ ထိခိုက်မှာ မဟုတ်ပါဘူး။
+                        ဒီလုပ်ဆောင်ချက်က {app.name}&apos;s database ထဲက ပဲ ဖျက်တာပါ။ Server ကိုကိုယ်တိုင်တော့ ထိခိုက်မှာ
+                        မဟုတ်ပါဘူး။
                     </p>
 
                     <Button

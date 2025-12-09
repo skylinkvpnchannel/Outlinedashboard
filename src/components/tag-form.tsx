@@ -65,9 +65,7 @@ export default function TagForm({ tag }: Props) {
             <MessageModal
                 body={
                     <div className="grid gap-2">
-                        <pre className="text-sm break-words whitespace-pre-wrap text-danger-500">
-                            {errorMessage}
-                        </pre>
+                        <pre className="text-sm break-words whitespace-pre-wrap text-danger-500">{errorMessage}</pre>
                     </div>
                 }
                 disclosure={errorModalDisclosure}

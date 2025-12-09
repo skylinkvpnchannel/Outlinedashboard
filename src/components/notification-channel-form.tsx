@@ -217,8 +217,8 @@ export default function NotificationChannelForm({ channel }: Props) {
                                 {selectedType === "Telegram" && (
                                     <Alert color="warning" variant="flat">
                                         သင့် Server တင်ထားတဲ့ Region မှာ Telegram ကို ပိတ်ထားတယ်ဆိုရင် Telegram API ကနေ
-                                        Notification ပို့ရာမှာ အခက်အခဲရှိနိုင်ပါတယ်။  
-                                        အဲ့ဒါ ဖြေရှင်းဖို့ Proxy တစ်ခုသုံးနိုင်ပါတယ် — ဥပမာ{" "}
+                                        Notification ပို့ရာမှာ အခက်အခဲရှိနိုင်ပါတယ်။ အဲ့ဒါ ဖြေရှင်းဖို့ Proxy
+                                        တစ်ခုသုံးနိုင်ပါတယ် — ဥပမာ{" "}
                                         <Link
                                             className="text-warning font-black contents"
                                             href={app.links.myTelegramApiProxyWorkerRepo}

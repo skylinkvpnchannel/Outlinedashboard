@@ -26,8 +26,8 @@ function extractPath(url: string): string | null {
         }
 
         return slugify(pathSegments[dakIndex + 1]);
-    } catch (error) {
-        return null;
+    } catch {
+        setStats(null);
     }
 }
 
@@ -118,9 +118,7 @@ export default function DynamicAccessKeyStatsForm() {
                         <CardHeader>
                             <div className="grid gap-1">
                                 <span className="max-w-[320px] truncate">{stats.name}</span>
-                                <span className="max-w-[320px] truncate text-foreground-400 text-sm">
-                                    {stats.path}
-                                </span>
+                                <span className="max-w-[320px] truncate text-foreground-400 text-sm">{stats.path}</span>
                             </div>
                         </CardHeader>
                         <CardBody className="text-sm grid gap-2">

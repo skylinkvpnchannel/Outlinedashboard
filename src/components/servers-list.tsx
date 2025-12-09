@@ -38,10 +38,8 @@ export default function ServersList({ data }: Props) {
     const searchForm = useForm<SearchFormProps>();
 
     const handleSearch = async (data: SearchFormProps) => {
-        const filteredServers = await getServersWithTags(
-            { term: data.term },
-            true
-        );
+        const filteredServers = await getServersWithTags({ term: data.term }, true);
+
         setServers(filteredServers);
     };
 
@@ -63,8 +61,8 @@ export default function ServersList({ data }: Props) {
                     <div className="grid gap-2">
                         <span>ဒီ Server ကိုဖျက်ချင်တာ သေချာပြီလား?</span>
                         <p className="text-default-500 text-sm">
-                            ဒီလုပ်ဆောင်ချက်က {app.name} ရဲ့ database ထဲကပဲ ဖျက်တာပါ။
-                            Server ကိုကိုယ်တိုင်တော့ ထိခိုက်မှာ မဟုတ်ပါဘူး။
+                            ဒီလုပ်ဆောင်ချက်က {app.name} ရဲ့ database ထဲကပဲ ဖျက်တာပါ။ Server ကိုကိုယ်တိုင်တော့ ထိခိုက်မှာ
+                            မဟုတ်ပါဘူး။
                         </p>
                     </div>
                 }
@@ -121,9 +119,7 @@ export default function ServersList({ data }: Props) {
                         >
                             <CardHeader>
                                 <div className="grid gap-1">
-                                    <span className="truncate font-medium">
-                                        {item.name}
-                                    </span>
+                                    <span className="truncate font-medium">{item.name}</span>
                                 </div>
                             </CardHeader>
 
@@ -207,11 +203,11 @@ export default function ServersList({ data }: Props) {
 
                             <CardFooter>
                                 <ButtonGroup
-                                    color="default"
                                     fullWidth
+                                    className="!flex-nowrap"
+                                    color="default"
                                     size="sm"
                                     variant="flat"
-                                    className="!flex-nowrap"
                                 >
                                     <Button as={Link} href={`/servers/${item.id}/access-keys`}>
                                         Access Keys
