@@ -1,11 +1,10 @@
 "use client";
 
 import NextLink from "next/link";
-import React from "react";
 import { usePathname } from "next/navigation";
 import { Button } from "@heroui/react";
 import { useForm } from "react-hook-form";
-import { UseDisclosureReturn } from "@heroui/use-disclosure";
+import type { UseDisclosureReturn } from "@heroui/use-disclosure";
 import { motion } from "framer-motion";
 
 import {
@@ -111,9 +110,7 @@ export const SideMenu = ({ drawerDisclosure }: Props) => {
             <p className="font-extrabold tracking-wider text-lg">
               {app.name.toUpperCase()}
             </p>
-            <p className="text-xs text-foreground-500">
-              Admin Dashboard
-            </p>
+            <p className="text-xs text-foreground-500">Admin Dashboard</p>
           </div>
         </NextLink>
 
@@ -141,15 +138,13 @@ export const SideMenu = ({ drawerDisclosure }: Props) => {
                     "group relative flex items-center gap-3 px-3 py-2.5 rounded-2xl transition-all",
                     active
                       ? "bg-gradient-to-r from-emerald-500/15 via-cyan-500/10 to-transparent text-emerald-700 dark:text-emerald-200"
-                      : "hover:bg-black/5 dark:hover:bg-white/5 text-foreground-700 dark:text-foreground-200",
+                      : "hover:bg-black/5 dark:hover:bg-white/5 text-foreground dark:text-foreground",
                   ].join(" ")}
                 >
-                  {/* active left glow bar */}
                   {active && (
                     <span className="absolute left-1 top-1.5 bottom-1.5 w-1 rounded-full bg-emerald-500 shadow-[0_0_12px_rgba(16,185,129,0.9)]" />
                   )}
 
-                  {/* icon bubble */}
                   <div
                     className={[
                       "shrink-0 grid place-items-center w-9 h-9 rounded-xl transition",
@@ -161,17 +156,11 @@ export const SideMenu = ({ drawerDisclosure }: Props) => {
                     {item.icon}
                   </div>
 
-                  {/* English + Myanmar labels */}
                   <div className="flex flex-col leading-tight">
-                    <span className="font-semibold text-sm">
-                      {item.label}
-                    </span>
-                    <span className="text-[11px] opacity-70">
-                      {item.subLabel}
-                    </span>
+                    <span className="font-semibold text-sm">{item.label}</span>
+                    <span className="text-[11px] opacity-70">{item.subLabel}</span>
                   </div>
 
-                  {/* subtle arrow on hover */}
                   <span className="ml-auto opacity-0 group-hover:opacity-70 transition text-xs">
                     →
                   </span>
