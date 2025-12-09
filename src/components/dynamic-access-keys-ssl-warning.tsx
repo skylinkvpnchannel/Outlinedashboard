@@ -14,5 +14,9 @@ export default function DynamicAccessKeysSslWarning() {
 
     if (!isHttp) return null;
 
-    return <Alert color="warning">A valid domain name with SSL encryption is required to use this feature.</Alert>;
+    return (
+        <Alert color="warning">
+            ဒီ feature ကို အသုံးပြုဖို့ SSL (HTTPS) ပါတဲ့ မှန်ကန်တဲ့ domain name တစ်ခု လိုအပ်ပါတယ်။
+        </Alert>
+    );
 }
