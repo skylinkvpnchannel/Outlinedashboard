@@ -4,6 +4,8 @@ import ServersList from "@/src/components/servers-list";
 import { getServersWithTags } from "@/src/core/actions/server";
 import { createPageTitle } from "@/src/core/utils";
 
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
     title: createPageTitle("Servers")
 };

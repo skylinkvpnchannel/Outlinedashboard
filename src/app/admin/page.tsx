@@ -6,6 +6,8 @@ import AdminPasswordForm from "@/src/components/admin-password-form";
 import { LOGIN_ROUTE } from "@/src/core/config";
 import { createPageTitle } from "@/src/core/utils";
 
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
     title: createPageTitle("Admin User")
 };
