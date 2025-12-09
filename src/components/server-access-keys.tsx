@@ -67,6 +67,7 @@ export default function ServerAccessKeys({ server, total }: Props) {
         setIsLoading(true);
         try {
             const data = await getAccessKeys(server.id, { skip: (page - 1) * PAGE_SIZE });
+
             setAccessKeys(data);
         } finally {
             setIsLoading(false);
@@ -109,9 +110,7 @@ export default function ServerAccessKeys({ server, total }: Props) {
                 body={
                     <div className="grid gap-2">
                         <span>Access Key ကို ဖျက်မရပါ။ တစ်ခုခုမှားယွင်းနေပါတယ်။</span>
-                        <pre className="text-sm break-words whitespace-pre-wrap text-danger-500">
-                            {serverError}
-                        </pre>
+                        <pre className="text-sm break-words whitespace-pre-wrap text-danger-500">{serverError}</pre>
                     </div>
                 }
                 disclosure={apiErrorModalDisclosure}
@@ -123,9 +122,7 @@ export default function ServerAccessKeys({ server, total }: Props) {
                 body={
                     <div className="grid gap-2">
                         <span>ဒီ Access Key ကို ဖျက်ချင်တာ သေချာပြီလား?</span>
-                        <p className="text-default-500 text-sm whitespace-pre-wrap break-all">
-                            {formattedAccessKey}
-                        </p>
+                        <p className="text-default-500 text-sm whitespace-pre-wrap break-all">{formattedAccessKey}</p>
                     </div>
                 }
                 confirmLabel="ဖျက်မယ်"
@@ -139,7 +136,7 @@ export default function ServerAccessKeys({ server, total }: Props) {
                 <section className="flex justify-between items-center gap-2 flex-wrap">
                     <section className="flex items-center gap-2">
                         <Tooltip closeDelay={100} color="default" content="Servers" delay={600} size="sm">
-                            <Button as={Link} href="/servers" isIconOnly size="sm" variant="light">
+                            <Button isIconOnly as={Link} href="/servers" size="sm" variant="light">
                                 <ArrowLeftIcon size={20} />
                             </Button>
                         </Tooltip>
@@ -239,7 +236,7 @@ export default function ServerAccessKeys({ server, total }: Props) {
                                     </CardBody>
 
                                     <CardFooter>
-                                        <ButtonGroup color="default" fullWidth size="sm" variant="flat">
+                                        <ButtonGroup fullWidth color="default" size="sm" variant="flat">
                                             <Button
                                                 onPress={() => {
                                                     setCurrentAccessKey(item);
@@ -249,7 +246,10 @@ export default function ServerAccessKeys({ server, total }: Props) {
                                                 မျှဝေမယ်
                                             </Button>
 
-                                            <Button as={Link} href={`/servers/${server.id}/access-keys/${item.id}/edit`}>
+                                            <Button
+                                                as={Link}
+                                                href={`/servers/${server.id}/access-keys/${item.id}/edit`}
+                                            >
                                                 ပြင်မယ်
                                             </Button>
 

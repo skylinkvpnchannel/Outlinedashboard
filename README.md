@@ -11,9 +11,8 @@ servers.
 ![CodeQL](https://github.com/AmRo045/OutlineAdmin/actions/workflows/github-code-scanning/codeql/badge.svg)
 [![Docker Pulls](https://img.shields.io/docker/pulls/amro045/outline-admin.svg?maxAge=604800)](https://hub.docker.com/r/amro045/outline-admin/)
 
-> [!NOTE]
-> The previous PHP/Laravel version of this project has been moved to
-> the [OutlineAdminLaravel](https://github.com/AmRo045/OutlineAdminLaravel) repository.
+> [!NOTE] The previous PHP/Laravel version of this project has been moved to the
+> [OutlineAdminLaravel](https://github.com/AmRo045/OutlineAdminLaravel) repository.
 
 ## Table of Contents
 
@@ -29,11 +28,11 @@ servers.
     - [Docker Compose](#docker-compose)
     - [NodeJS](#nodejs)
 3. [Nginx Integration](#nginx-integration)
-3. [Updating to Latest Version](#updating-to-latest-version)
-4. [Development](#development)
-5. [Admin Password](#admin-password)
-6. [Donation](#donation)
-7. [Screenshots](#screenshots)
+4. [Updating to Latest Version](#updating-to-latest-version)
+5. [Development](#development)
+6. [Admin Password](#admin-password)
+7. [Donation](#donation)
+8. [Screenshots](#screenshots)
 
 ## Added Features
 
@@ -50,61 +49,58 @@ pooling features.
 
 #### Self-Managed DAKs
 
-A Self-Managed DAK automatically manages its associated access keys.
-When a client requests access and no key exists, the system will create one on demand.
-If a key expires or reaches its data limit, the underlying access keys will be removed automatically.
-Example of an auto-generated access key name: `self-managed-dak-access-key-{dak_id}`.
-These access keys are hidden in Outline Admin but remain visible in Outline Manager.
+A Self-Managed DAK automatically manages its associated access keys. When a client requests access and no key exists,
+the system will create one on demand. If a key expires or reaches its data limit, the underlying access keys will be
+removed automatically. Example of an auto-generated access key name: `self-managed-dak-access-key-{dak_id}`. These
+access keys are hidden in Outline Admin but remain visible in Outline Manager.
 
-Self-Managed DAKs use a server pool to decide where to create new access keys.
-You can choose how this pool is formed using one of the following modes:
+Self-Managed DAKs use a server pool to decide where to create new access keys. You can choose how this pool is formed
+using one of the following modes:
 
-Self-Managed DAKs use a server pool to decide where to create new access keys.
-You can choose how this pool is formed using one of the following modes:
+Self-Managed DAKs use a server pool to decide where to create new access keys. You can choose how this pool is formed
+using one of the following modes:
 
 #### Manual Server Selection
 
 In this mode, available servers are listed, and you can manually select one or more servers to include in the server
-pool.
-When the DAK creates an access key automatically, it will select one of these servers.
+pool. When the DAK creates an access key automatically, it will select one of these servers.
 
 #### Tag-Based Server Selection
 
-Instead of manually selecting servers, you can assign tags to servers (for example, `EU`, `US`, `High-Speed`,
-or `Irancell`).
-When creating a Self-Managed DAK, you can choose which tags to include.
-The DAK will then automatically use all servers matching those tags to form its pool.
+Instead of manually selecting servers, you can assign tags to servers (for example, `EU`, `US`, `High-Speed`, or
+`Irancell`). When creating a Self-Managed DAK, you can choose which tags to include. The DAK will then automatically use
+all servers matching those tags to form its pool.
 
 #### Manual DAKs
 
-A Manual DAK does not automatically create or remove access keys.
-Instead, the admin attach/detach access keys manually — similar to the official Outline dynamic access keys.
+A Manual DAK does not automatically create or remove access keys. Instead, the admin attach/detach access keys manually
+— similar to the official Outline dynamic access keys.
 
 ### Health Check
 
 Outline Admin includes an automated Health Check system to monitor the status and availability of your servers.
 
-When you add a new server to Outline Admin, a health check is automatically created for that server.
-You can configure the check interval (how often the server is tested) and notification cooldown (how long to wait before
-sending another alert) in the Health Checks section.
+When you add a new server to Outline Admin, a health check is automatically created for that server. You can configure
+the check interval (how often the server is tested) and notification cooldown (how long to wait before sending another
+alert) in the Health Checks section.
 
 ### Notification Channels
 
 To ensure you’re promptly informed about server issues, Outline Admin lets you define and manage notification channels.
 
-For example, you can set up a Telegram notification channel and link it to your server’s health check.
-If the server becomes unreachable or fails its check, Outline Admin will automatically send a notification through your
-chosen channel.
+For example, you can set up a Telegram notification channel and link it to your server’s health check. If the server
+becomes unreachable or fails its check, Outline Admin will automatically send a notification through your chosen
+channel.
 
 ### Expiration Date
 
-Outline Admin lets you set an expiration date for both standard access keys and dynamic access keys.
-When an access key reaches its expiration date, it will be automatically disabled, preventing any further connections.
+Outline Admin lets you set an expiration date for both standard access keys and dynamic access keys. When an access key
+reaches its expiration date, it will be automatically disabled, preventing any further connections.
 
 ### Tags
 
-Tags provide a simple and flexible way to organize and group servers in Outline Admin.
-You can assign one or more tags to each server — for example, `EU`, `US`, `Asia`, `High-Speed` or `Irancell`.
+Tags provide a simple and flexible way to organize and group servers in Outline Admin. You can assign one or more tags
+to each server — for example, `EU`, `US`, `Asia`, `High-Speed` or `Irancell`.
 
 ### Prefix
 
@@ -112,13 +108,11 @@ You can assign one or more tags to each server — for example, `EU`, `US`, `Asi
 This helps bypass firewalls that block or inspect encrypted traffic by making Outline connections look like familiar
 protocols such as `HTTP`, `TLS`, `DNS`, or `SSH`.
 
-A prefix is a short sequence of bytes added at the start of a Shadowsocks connection.
-The port number used should typically match the protocol that the prefix is mimicking — for example, port `80` for
-`HTTP` or
-`443` for `HTTPS`.
+A prefix is a short sequence of bytes added at the start of a Shadowsocks connection. The port number used should
+typically match the protocol that the prefix is mimicking — for example, port `80` for `HTTP` or `443` for `HTTPS`.
 
-In Outline Admin, prefixes can be configured for both static and dynamic access keys.
-Admins can define and assign prefixes to help users connect more reliably in restricted networks.
+In Outline Admin, prefixes can be configured for both static and dynamic access keys. Admins can define and assign
+prefixes to help users connect more reliably in restricted networks.
 
 Example use cases:
 
@@ -128,9 +122,8 @@ Simulate `TLS` traffic (`"\u0016\u0003\u0001\u0000\u00a8\u0001\u0001"` → port 
 
 Simulate `SSH` handshakes (`"SSH-2.0\r\n"` → port `22`)
 
-> [!NOTE]
-> Prefixes should be no longer than 16 bytes. Longer prefixes can cause salt collisions, which may reduce encryption
-> safety.
+> [!NOTE] Prefixes should be no longer than 16 bytes. Longer prefixes can cause salt collisions, which may reduce
+> encryption safety.
 
 ---
 
@@ -165,8 +158,8 @@ docker-compose up -d
 
 ### NodeJS
 
-To run this project on your machine, ensure you have Node.js v20 or later and npm v10 or later installed.
-Follow the steps below to set up Outline Admin using Node.js:
+To run this project on your machine, ensure you have Node.js v20 or later and npm v10 or later installed. Follow the
+steps below to set up Outline Admin using Node.js:
 
 #### Step 1: Prepare the project files
 
@@ -185,7 +178,7 @@ npm install
 #### Step 3: Create the database
 
 ```bash
-npx prisma migrate deploy 
+npx prisma migrate deploy
 npx prisma generate
 ```
 
@@ -193,7 +186,7 @@ npx prisma generate
 
 ```bash
 npm run compile
-npm run setup 
+npm run setup
 npm run build
 ```
 
@@ -209,8 +202,7 @@ node server.js
 ## Nginx Integration
 
 If you want to expose Outline Admin over `HTTPS` using your own domain, the recommended approach is to run it behind
-Nginx
-as a reverse proxy.
+Nginx as a reverse proxy.
 
 Below is an example Nginx configuration you can use as a starting point:
 
@@ -365,10 +357,8 @@ UQByW0gL9r89D4oFagC3ZRCEctIoh6XjHu7zv5xU2wcPVATT
 
 ## Screenshots
 
-![Login](/.github/screenshots/1-login.png)
-![Servers](/.github/screenshots/2-servers.png)
-![New server](/.github/screenshots/3-new-server.png)
-![Server settings](/.github/screenshots/4-server-settings.png)
+![Login](/.github/screenshots/1-login.png) ![Servers](/.github/screenshots/2-servers.png)
+![New server](/.github/screenshots/3-new-server.png) ![Server settings](/.github/screenshots/4-server-settings.png)
 ![Server metrics](/.github/screenshots/5-server-metrics.png)
 ![Server access keys](/.github/screenshots/6-server-access-keys.png)
 ![Dynamic access keys](/.github/screenshots/7-dynamic-access-keys.png)

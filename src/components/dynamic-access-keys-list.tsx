@@ -83,9 +83,7 @@ export default function DynamicAccessKeysList() {
     const getCurrentAccessKeyUrl = () => {
         if (!currentDynamicAccessKey) return;
 
-        const swappedProtocol = window.location.origin
-            .replace("http://", "ssconf://")
-            .replace("https://", "ssconf://");
+        const swappedProtocol = window.location.origin.replace("http://", "ssconf://").replace("https://", "ssconf://");
         const name = encodeURIComponent(currentDynamicAccessKey.name);
 
         return `${swappedProtocol}/api/dak/${currentDynamicAccessKey.path}#${name}`;
@@ -100,9 +98,11 @@ export default function DynamicAccessKeysList() {
         setIsLoading(true);
         try {
             const data = await getDynamicAccessKeys(params, true);
+
             setDynamicAccessKeys(data);
 
             const count = await getDynamicAccessKeysCount(params);
+
             setTotalItems(count);
         } finally {
             setIsLoading(false);
@@ -141,7 +141,8 @@ export default function DynamicAccessKeysList() {
                     <div className="grid gap-2">
                         <span>ဒီ Dynamic Access Key ကို Reset လုပ်ချင်တာ သေချာလား?</span>
                         <p className="text-foreground-500 text-sm whitespace-pre-wrap break-all">
-                            ဒီလုပ်ဆောင်ချက်က Data Usage ကို 0 ပြန်ထားပြီး Usage Start Date ကိုလည်း ပြန်ဖျက်ပစ်ပါလိမ့်မယ်။
+                            ဒီလုပ်ဆောင်ချက်က Data Usage ကို 0 ပြန်ထားပြီး Usage Start Date ကိုလည်း
+                            ပြန်ဖျက်ပစ်ပါလိမ့်မယ်။
                         </p>
                     </div>
                 }
@@ -288,7 +289,7 @@ export default function DynamicAccessKeysList() {
                                 </CardBody>
 
                                 <CardFooter>
-                                    <ButtonGroup color="default" fullWidth size="sm" variant="flat">
+                                    <ButtonGroup fullWidth color="default" size="sm" variant="flat">
                                         <Button
                                             onPress={() => {
                                                 setCurrentDynamicAccessKey(item);
