@@ -71,14 +71,15 @@ export default function HealthCheckList() {
         <>
             <div className="grid gap-4">
                 <div className="flex gap-2 items-center">
-                    <h1 className="text-xl">Your Health Checks</h1>
+                    {/* Title */}
+                    <h1 className="text-xl">သင့် Health Check များ</h1>
                 </div>
 
                 <div className="flex justify-between items-center gap-2">
                     <form onSubmit={searchForm.handleSubmit(handleSearch)}>
                         <Input
                             className="w-fit"
-                            placeholder="Name [+Enter]"
+                            placeholder="အမည် [+Enter]"
                             startContent={<>🔍</>}
                             variant="faded"
                             {...searchForm.register("term")}
