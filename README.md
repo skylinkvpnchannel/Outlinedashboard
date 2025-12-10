@@ -2,7 +2,7 @@
     <img src=".github/logo.svg" width="200" alt="Outline Logo"> 
 </p>
 
-<h2 align="center">Outline Admin</h2>
+<h2 align="center">Outline Dashboard</h2>
 
 Outline Admin is a web interface for the Outline Manager API, providing a simple and user-friendly UI for managing VPN
 servers.
@@ -11,8 +11,15 @@ servers.
 ![CodeQL](https://github.com/AmRo045/OutlineAdmin/actions/workflows/github-code-scanning/codeql/badge.svg)
 [![Docker Pulls](https://img.shields.io/docker/pulls/amro045/outline-admin.svg?maxAge=604800)](https://hub.docker.com/r/amro045/outline-admin/)
 
-> [!NOTE] The previous PHP/Laravel version of this project has been moved to the
-> [OutlineAdminLaravel](https://github.com/AmRo045/OutlineAdminLaravel) repository.
+A clean and modern web dashboard for **Outline Manager API** — built for managing VPN servers, access keys, Dynamic Access Keys (DAKs), health checks, notification channels, tags, and prefixes.
+
+---
+
+## Live Demo
+
+- Dashboard: **https://outline.netfusion.space**
+
+---
 
 ## Table of Contents
 
@@ -131,11 +138,13 @@ Simulate `SSH` handshakes (`"SSH-2.0\r\n"` → port `22`)
 
 ### Docker
 
-Before installing Outline Admin, ensure that Docker and Docker Compose are installed on your machine. Use the following
-commands to start the container:
-
 ```bash
-docker run -d -p 3000:3000 --name outline-admin -v ./oa_data:/app/data -v ./logs:/app/logs --restart unless-stopped amro045/outline-admin:latest
+docker run -d -p 3000:3000 \
+  --name outlinedashboard \
+  -v ./oa_data:/app/data \
+  -v ./logs:/app/logs \
+  --restart unless-stopped \
+  skylinkvpnchannel/outlinedashboard:latest
 ```
 
 #### Docker Compose
@@ -143,78 +152,46 @@ docker run -d -p 3000:3000 --name outline-admin -v ./oa_data:/app/data -v ./logs
 To simplify the installation, you can use a Docker Compose file:
 
 ```bash
-wget -O docker-compose.yml https://raw.githubusercontent.com/AmRo045/OutlineAdmin/main/docker-compose.yml
-```
-
-```bash
-docker compose up -d
-```
-
-or
-
-```bash
 docker-compose up -d
 ```
 
 ### NodeJS
 
-To run this project on your machine, ensure you have Node.js v20 or later and npm v10 or later installed. Follow the
-steps below to set up Outline Admin using Node.js:
+Requirements:
+
+Node.js v20+
+
+npm v10+
 
 #### Step 1: Prepare the project files
 
 ```bash
-git clone https://github.com/AmRo045/OutlineAdmin.git
-cd OutlineAdmin
+git clone https://github.com/skylinkvpnchannel/Outlinedashboard.git
+cd Outlinedashboard
 cp .env.example .env
-```
-
-#### Step 2: Install dependencies
-
-```bash
 npm install
-```
 
-#### Step 3: Create the database
-
-```bash
 npx prisma migrate deploy
 npx prisma generate
-```
 
-#### Step 4: Build the project
-
-```bash
 npm run compile
 npm run setup
 npm run build
-```
 
-#### Step 5: Start the application
-
-```bash
 cd .next/standalone
 node server.js
+
 ```
 
----
+#### Step 2: Nginx Reverse Proxy (HTTPS)
 
-## Nginx Integration
-
-If you want to expose Outline Admin over `HTTPS` using your own domain, the recommended approach is to run it behind
-Nginx as a reverse proxy.
-
-Below is an example Nginx configuration you can use as a starting point:
-
-```conf
+```bash
 server {
     listen 443 ssl;
-    server_name your-outline-admin-domain.com;
+    server_name your-domain.com;
 
-    ssl_certificate /etc/letsencrypt/live/your-outline-admin-domain.com/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/your-outline-admin-domain.com/privkey.pem;
-    include /etc/letsencrypt/options-ssl-nginx.conf;
-    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
+    ssl_certificate /etc/letsencrypt/live/your-domain.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/your-domain.com/privkey.pem;
 
     location / {
         proxy_pass http://localhost:3000;
@@ -228,101 +205,35 @@ server {
 
 server {
     listen 80;
-    server_name your-outline-admin-domain.com;
-
+    server_name your-domain.com;
     return 301 https://$host$request_uri;
 }
+
 ```
 
----
-
-## Updating to Latest Version
-
-Pull the latest version of the outline-admin image
+#### Step 3: Updating
 
 ```bash
-docker pull amro045/outline-admin:latest
-```
-
-Stop running container
-
-```bash
-docker compose down
-```
-
-Restart the container
-
-```bash
-docker compose up -d
-```
-
-Clean up the old image to free up disk space
-
-```bash
-docker rmi {old-image-id}
-```
-
-Replace {old-image-id} with the ID of the old image you want to remove.
-
----
-
-## Development
-
-Follow the steps below:
-
-#### Step 1: Prepare the project files
-
-```bash
-git clone https://github.com/AmRo045/OutlineAdmin.git
-cd OutlineAdmin
-cp .env.example .env
-```
-
-#### Step 2: Install dependencies
-
-```bash
+git pull origin main
 npm install
+npm run build
+pm2 restart outlinedashboard   # or your process manager
+
 ```
 
-#### Step 3: Create the database
+#### Step 4: Admin Password
+
+Docker:
 
 ```bash
-npx prisma db push
-npx prisma generate
+docker exec -it outlinedashboard npm run password:change "new password"
 ```
 
-#### Step 4: Build the project
+Non-docker:
 
 ```bash
-npm run compile
-npm run setup
+npm run password:change "new password"
 ```
-
-#### Step 5: Start the application
-
-```bash
-npm run dev
-```
-
----
-
-## Admin Password
-
-To update the admin user password, use one of the following commands.
-
-For Docker containers:
-
-```bash
-docker exec -it outline-admin npm run password:change "your new password"
-```
-
-For non-Docker setup:
-
-```bash
-npm run password:change "your new password"
-```
-
----
 
 ## Screenshots
 
