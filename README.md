@@ -21,26 +21,6 @@ A clean and modern web dashboard for **Outline Manager API** — built for manag
 
 ---
 
-## Table of Contents
-
-1. [Added Features](#added-features)
-    - [Dynamic Access Keys](#dynamic-access-keys)
-    - [Health Check](#health-check)
-    - [Notification Channels](#notification-channels)
-    - [Expiration Date](#expiration-date)
-    - [Tags](#tags)
-    - [Prefix](#prefix)
-2. [Installation](#installation)
-    - [Docker](#docker)
-    - [Docker Compose](#docker-compose)
-    - [NodeJS](#nodejs)
-3. [Nginx Integration](#nginx-integration)
-4. [Updating to Latest Version](#updating-to-latest-version)
-5. [Development](#development)
-6. [Admin Password](#admin-password)
-7. [Donation](#donation)
-8. [Screenshots](#screenshots)
-
 ## Added Features
 
 The following features have been added to extend the functionality of the Outline Manager API:
