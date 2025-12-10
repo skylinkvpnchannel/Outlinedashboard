@@ -324,37 +324,6 @@ npm run password:change "your new password"
 
 ---
 
-## Donation
-
-If you find this project useful and would like to support its development, consider making a donation. Your support is
-greatly appreciated!
-
-### BTC
-
-```
-bc1qjmnnw4779ntv08uuqmpqnx7hqmygl08z4z500a
-```
-
-### USDT
-
-```
-0xCcF2117F837b16fbc0FbDe0178De0a2aCbfadC58
-```
-
-### TON
-
-```
-UQByW0gL9r89D4oFagC3ZRCEctIoh6XjHu7zv5xU2wcPVATT
-```
-
-### ETH
-
-```
-0xCcF2117F837b16fbc0FbDe0178De0a2aCbfadC58
-```
-
----
-
 ## Screenshots
 
 ![Login](/.github/screenshots/1-login.png) ![Servers](/.github/screenshots/2-servers.png)
