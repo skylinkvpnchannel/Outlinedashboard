@@ -215,15 +215,4 @@ Non-docker:
 npm run password:change "new password"
 ```
 
-## Screenshots
 
-![Login](/.github/screenshots/1-login.png) ![Servers](/.github/screenshots/2-servers.png)
-![New server](/.github/screenshots/3-new-server.png) ![Server settings](/.github/screenshots/4-server-settings.png)
-![Server metrics](/.github/screenshots/5-server-metrics.png)
-![Server access keys](/.github/screenshots/6-server-access-keys.png)
-![Dynamic access keys](/.github/screenshots/7-dynamic-access-keys.png)
-![New dynamic access key](/.github/screenshots/8-new-dynamic-access-key.png)
-![Health checks](/.github/screenshots/9-health-checks.png)
-![Notification channels](/.github/screenshots/10-notification-channels.png)
-![New notification channels](/.github/screenshots/11-new-notification-channel.png)
-![Tags](/.github/screenshots/12-tags.png)
