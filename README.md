@@ -215,4 +215,6 @@ Non-docker:
 npm run password:change "new password"
 ```
 
+## Screenshots
 
+![Login](.github/screenshots/login.png)
