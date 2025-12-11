@@ -218,3 +218,6 @@ npm run password:change "new password"
 ## Screenshots
 
 ![Login](.github/screenshots/login.png)
+![Server](.github/screenshots/server.png)
+![Accesskey](.github/screenshots/accesskey.png)
+![Healthchack](.github/screenshots/healthchack.png)
